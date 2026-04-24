@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #af101a;
+  --color-primary-container: #d32f2f;
+  --color-on-primary: #ffffff;
+  --color-secondary: #a23c39;
+  --color-accent: #C89B3C;
+  --color-surface: #fff8f7;
+  --color-on-surface: #271816;
+  --color-on-surface-variant: #5b403d;
+  --color-outline: #8f6f6c;
+  
+  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  
+  --spacing-container-max: 1280px;
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-on-surface font-sans antialiased;
+  }
+}
+
+.gold-prestige {
+  @apply bg-accent text-white;
+}
+
+.ambient-shadow {
+  box-shadow: 0px 15px 30px -10px rgba(175, 16, 26, 0.1);
+}
+
+.countdown-red {
+  @apply bg-red-600 text-white translate-z-0;
+}
+
+/* Accessibility: Focus states */
+button:focus-visible, a:focus-visible {
+  @apply outline-none ring-2 ring-primary ring-offset-2;
+}
