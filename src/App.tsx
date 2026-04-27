@@ -32,6 +32,14 @@ import overviewImg3 from '../Images/Overview/image3.jpeg';
 import overviewImg4 from '../Images/Overview/image4.jpeg';
 import overviewImg5 from '../Images/Overview/image5.jpeg';
 import overviewImg6 from '../Images/Overview/image6.jpeg';
+import reviewImg1 from '../Images/reviews/review-1.png';
+import reviewImg2 from '../Images/reviews/review-2.png';
+import reviewImg3 from '../Images/reviews/review-3.png';
+import reviewImg4 from '../Images/reviews/review-4.png';
+import reviewImg5 from '../Images/reviews/review-5.png';
+import reviewImg6 from '../Images/reviews/review-6.png';
+import reviewImg7 from '../Images/reviews/review-7.png';
+import reviewImg8 from '../Images/reviews/review-8.png';
 
 const OVERVIEW_IMAGES = [overviewImg1, overviewImg2, overviewImg3, overviewImg4, overviewImg5, overviewImg6];
 
@@ -205,7 +213,7 @@ export default function App() {
               <span className="text-primary-container">Y Khoa DrKam</span>
             </h1>
             <p className="text-lg md:text-xl text-on-surface-variant max-w-lg leading-relaxed">
-              Công nghệ Postbiotic độc quyền — cân bằng hệ vi khuẩn có lợi trong miệng, không cồn, không chất bảo quản. An toàn cho cả phụ nữ mang thai và trẻ em.
+              Thương hiệu chăm sóc răng miệng chuẩn y khoa của Việt Nam — được sáng lập bởi đội ngũ chuyên gia giàu kinh nghiệm. Hỗ trợ xử lý hôi miệng, viêm nướu, mảng bám, ê buốt và chảy máu chân răng.
             </p>
 
             <div className="flex items-center gap-4 py-2 border-y border-primary/5">
@@ -217,9 +225,9 @@ export default function App() {
 
             <ul className="space-y-3">
               {[
-                "Không cồn, không chất bảo quản — dịu nhẹ mọi lứa tuổi",
-                "Postbiotic patent Mỹ — khoa học, không phải quảng cáo",
-                "An toàn cho phụ nữ mang thai & trẻ em từ 6 tuổi"
+                "Chlorhexidine nhập khẩu Châu Âu kết hợp chiết xuất lá lấu y học cổ truyền",
+                "Hỗ trợ hôi miệng, viêm nướu, chảy máu chân răng và nhiệt miệng",
+                "An toàn cho trẻ em từ 6 tuổi trở lên"
               ].map((item, id) => (
                 <li key={id} className="flex items-center gap-3 font-medium">
                   <CheckCircle2 className="text-green-600 w-5 h-5" />
@@ -228,7 +236,8 @@ export default function App() {
               ))}
             </ul>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            {/* Buttons — desktop only (shown inside left column) */}
+            <div className="hidden md:flex flex-col sm:flex-row gap-4 pt-4">
               <button className="bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all">
                 ĐẶT HÀNG — MIỄN PHÍ VẬN CHUYỂN
               </button>
@@ -246,6 +255,16 @@ export default function App() {
           >
             <HeroCarousel />
           </motion.div>
+
+          {/* Buttons — mobile only (shown after carousel) */}
+          <div className="flex md:hidden flex-col gap-3 pt-2">
+            <button className="w-full bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all">
+              ĐẶT HÀNG — MIỄN PHÍ VẬN CHUYỂN
+            </button>
+            <button className="w-full border-2 border-primary text-primary px-8 py-4 rounded-xl text-lg font-bold hover:bg-primary/5 transition-all">
+              XEM COMBO TIẾT KIỆM
+            </button>
+          </div>
         </section>
 
         {/* Trust Indicators */}
@@ -377,6 +396,107 @@ export default function App() {
           </div>
         </section>
 
+        {/* Reviews Section */}
+        <section className="py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #fff8f7, #f8f4f0)' }}>
+          {/* Header */}
+          <div className="max-w-container-max mx-auto px-6 mb-12 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">
+                Khách Hàng Nói Gì Về <span className="text-primary font-black">DrKam</span>?
+              </h2>
+              <p className="text-on-surface-variant text-base mb-8">Đánh giá thực tế từ người mua trên Shopee — không chỉnh sửa, không kịch bản.</p>
+
+              {/* Trust bar */}
+              <div className="inline-flex flex-wrap justify-center items-center gap-6 bg-white rounded-2xl px-8 py-4 shadow-sm border border-slate-100">
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                    ))}
+                  </div>
+                  <span className="font-black text-on-surface text-lg">4.9</span>
+                  <span className="text-on-surface-variant text-sm">/5</span>
+                </div>
+                <div className="w-px h-5 bg-slate-200 hidden sm:block" />
+                <div className="text-sm font-semibold text-on-surface">
+                  <span className="text-primary font-black text-base">2,500+</span> đánh giá thực tế
+                </div>
+                <div className="w-px h-5 bg-slate-200 hidden sm:block" />
+                <div className="flex items-center gap-1.5 text-sm font-semibold text-on-surface-variant">
+                  <ShieldCheck className="w-4 h-4 text-[#EE4D2D]" />
+                  Verified Shopee
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Marquee rows */}
+          <div className="space-y-4">
+            {/* Row 1 — scroll left */}
+            <div className="marquee-track overflow-hidden">
+              <div className="marquee-left flex gap-4 w-max">
+                {[reviewImg1, reviewImg2, reviewImg3, reviewImg4, reviewImg5, reviewImg6, reviewImg7, reviewImg8,
+                  reviewImg1, reviewImg2, reviewImg3, reviewImg4, reviewImg5, reviewImg6, reviewImg7, reviewImg8
+                ].map((src, i) => (
+                  <div
+                    key={i}
+                    className="flex-shrink-0 w-[520px] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white"
+                  >
+                    <img
+                      src={src}
+                      alt={`Đánh giá khách hàng DrKam ${(i % 8) + 1}`}
+                      className="w-full h-auto object-cover"
+                      draggable={false}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Row 2 — scroll right */}
+            <div className="marquee-track overflow-hidden">
+              <div className="marquee-right flex gap-4 w-max">
+                {[reviewImg5, reviewImg6, reviewImg7, reviewImg8, reviewImg1, reviewImg2, reviewImg3, reviewImg4,
+                  reviewImg5, reviewImg6, reviewImg7, reviewImg8, reviewImg1, reviewImg2, reviewImg3, reviewImg4
+                ].map((src, i) => (
+                  <div
+                    key={i}
+                    className="flex-shrink-0 w-[520px] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white"
+                  >
+                    <img
+                      src={src}
+                      alt={`Đánh giá khách hàng DrKam ${(i % 8) + 1}`}
+                      className="w-full h-auto object-cover"
+                      draggable={false}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center mt-12 px-6">
+            <p className="text-sm text-on-surface-variant">
+              Xem thêm đánh giá tại{' '}
+              <a
+                href="https://shopee.vn/drkamvnstore"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-[#EE4D2D] underline underline-offset-2 hover:opacity-75 transition-opacity"
+              >
+                Shopee
+              </a>{' '}
+              — tìm kiếm "DrKam nước súc miệng"
+            </p>
+          </div>
+        </section>
+
         {/* Pricing Combos */}
         <section id="products" className="py-24 max-w-container-max mx-auto px-6">
           <div className="text-center mb-16 space-y-6">
@@ -437,38 +557,6 @@ export default function App() {
                 <li className="flex items-center gap-2 text-secondary font-bold">✨ Tặng 2 bàn chải cao cấp</li>
               </ul>
               <button className="w-full border-2 border-primary text-primary py-3 rounded-xl font-bold hover:bg-primary/5 transition-all uppercase text-sm">CHỌN COMBO</button>
-            </div>
-          </div>
-        </section>
-
-        {/* Reviews Section */}
-        <section className="bg-surface py-24">
-          <div className="max-w-container-max mx-auto px-6">
-            <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">
-              Khách Hàng Nói Gì Về <span className="text-primary font-black">DrKam</span>?
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { name: "Minh Anh", review: "Mình bị hôi miệng dai dẳng nhiều năm, thử đủ loại có thương hiệu đều không khỏi. Dùng DrKam được 2 tuần là hơi thở thơm hẳn — quan trọng nhất là không bị cay hay khô miệng như các loại khác." },
-                { name: "Hoàng Nam", review: "Vợ mình đang mang thai lo không dùng được nước súc miệng vì sợ cồn. DrKam không cồn, không chất bảo quản — bác sĩ cũng gật đầu. Cả nhà giờ đều dùng chung một sản phẩm." },
-                { name: "Chị Lan", review: "Ban đầu hoài nghi vì giá không rẻ, nhưng thử 1 chai xong mua ngay combo 3 chai cho cả nhà. Con tôi 8 tuổi dùng cũng an toàn. Không còn lo chảy máu chân răng mỗi sáng nữa." }
-              ].map((user, id) => (
-                <div key={id} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col">
-                  <div className="flex text-accent gap-1 mb-6">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
-                  </div>
-                  <p className="text-on-surface-variant italic mb-8 leading-relaxed flex-grow">"{user.review}"</p>
-                  <div className="flex items-center gap-4 border-t border-slate-50 pt-6">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center font-black text-primary">
-                      {user.name.charAt(0)}
-                    </div>
-                    <div>
-                      <p className="font-bold">{user.name}</p>
-                      <p className="text-xs font-semibold text-accent tracking-widest uppercase">Verified Buyer</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </section>
@@ -569,27 +657,6 @@ export default function App() {
           © {new Date().getFullYear()} DrKam Vietnam. All rights reserved. Sản phẩm được khuyên dùng bởi các bác sĩ nha khoa đầu ngành.
         </div>
       </footer>
-
-      {/* Floating Order Widget */}
-      <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end gap-4 pointer-events-none">
-        <motion.div 
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="bg-white p-4 rounded-2xl shadow-2xl border-2 border-accent w-64 pointer-events-auto group hover:-translate-y-2 transition-transform duration-300"
-        >
-          <div className="flex gap-3 items-center mb-3">
-            <div className="w-12 h-12 bg-slate-50 rounded-lg overflow-hidden border border-slate-100 flex-shrink-0">
-              <img className="w-full h-full object-cover" alt="Best seller combo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJT2Apvfw95IsTsrZ9WXRlbfNuMKAaBjgFi9_hvwpHSKjFrNPr4T73D-xNj42jA0_ewXwSG-u5mIFyAwjGH3UjxLaM3IB63Hl1_SKm17ld-QAEspf-jpS0j03_GrzbKrJWDpxV3RhIQPL2JAXqtcHG4jnHxDq2uK7qVhbjnxaZf5nlfpVVStvtgEL2GAgJ_xOEhCuaiVDRfFpAGkFkw0R_hKbVSRbbvaf5L8uS7ogFnGBVkEe0QS_xWvTEdejtj8E09dkpLSpKwTU" />
-            </div>
-            <div>
-              <p className="font-bold text-xs truncate">Combo Toàn Diện (3 chai)</p>
-              <p className="text-red-600 font-black">499.000đ</p>
-            </div>
-          </div>
-          <button className="w-full bg-red-600 text-white py-2 rounded-lg font-bold text-sm shadow-md animate-pulse group-hover:animate-none">ĐẶT HÀNG NGAY</button>
-          <div className="text-[10px] text-center mt-2 text-slate-400 font-medium italic">⚡ 12 người khác đang xem combo này</div>
-        </motion.div>
-      </div>
 
       {/* Mobile Sticky Navigation */}
       <nav className="fixed bottom-0 w-full z-50 md:hidden bg-white/95 backdrop-blur-md border-t border-slate-100 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] pb-safe">
