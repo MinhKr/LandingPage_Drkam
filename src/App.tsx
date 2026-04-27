@@ -4,24 +4,105 @@
  */
 
 import { motion } from 'motion/react';
-import { 
-  ShieldCheck, 
-  Star, 
-  Award, 
-  Microscope, 
-  Truck, 
-  ChevronDown, 
-  Search, 
-  User, 
+import {
+  ShieldCheck,
+  Star,
+  Award,
+  Microscope,
+  Truck,
+  ChevronDown,
+  Search,
+  User,
   ShoppingCart,
   MapPin,
   Phone,
   Mail,
   CheckCircle2,
   Menu,
-  X
+  X,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+import logoImg from '../Images/logo_Drkam.jpg';
+import overviewImg1 from '../Images/Overview/image1.jpeg';
+import overviewImg2 from '../Images/Overview/image2.png';
+import overviewImg3 from '../Images/Overview/image3.jpeg';
+import overviewImg4 from '../Images/Overview/image4.jpeg';
+import overviewImg5 from '../Images/Overview/image5.jpeg';
+import overviewImg6 from '../Images/Overview/image6.jpeg';
+
+const OVERVIEW_IMAGES = [overviewImg1, overviewImg2, overviewImg3, overviewImg4, overviewImg5, overviewImg6];
+
+function HeroCarousel() {
+  const [current, setCurrent] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const total = OVERVIEW_IMAGES.length;
+
+  const resetTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrent(c => (c + 1) % total);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    resetTimer();
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, []);
+
+  const goTo = (idx: number) => {
+    setCurrent((idx + total) % total);
+    resetTimer();
+  };
+
+  return (
+    <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-2xl group select-none">
+      {/* Slide strip */}
+      <div
+        className="flex h-full transition-transform duration-500 ease-in-out"
+        style={{ width: `${total * 100}%`, transform: `translateX(-${current * (100 / total)}%)` }}
+      >
+        {OVERVIEW_IMAGES.map((src, idx) => (
+          <div key={idx} className="h-full flex-shrink-0" style={{ width: `${100 / total}%` }}>
+            <img src={src} alt={`DrKam overview ${idx + 1}`} className="w-full h-full object-cover" />
+          </div>
+        ))}
+      </div>
+
+      {/* Prev button */}
+      <button
+        onClick={() => goTo(current - 1)}
+        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary rounded-full w-9 h-9 flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 z-10"
+        aria-label="Ảnh trước"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+
+      {/* Next button */}
+      <button
+        onClick={() => goTo(current + 1)}
+        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary rounded-full w-9 h-9 flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 z-10"
+        aria-label="Ảnh tiếp theo"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+
+      {/* Dot indicators */}
+      <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
+        {OVERVIEW_IMAGES.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => goTo(idx)}
+            className={`rounded-full transition-all ${idx === current ? 'bg-white w-4 h-2' : 'bg-white/50 w-2 h-2'}`}
+            aria-label={`Ảnh ${idx + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,11 +132,10 @@ export default function App() {
     <div className="min-h-screen">
       {/* Header */}
       <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
-        <div className="max-w-container-max mx-auto px-6 h-16 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="text-primary w-8 h-8" />
-            <span className="text-2xl font-black text-primary tracking-tighter uppercase">DrKam</span>
-          </div>
+        <div className="max-w-container-max mx-auto px-6 h-20 flex justify-between items-center">
+          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center cursor-pointer">
+            <img src={logoImg} alt="DrKam" className="h-14 w-auto object-contain" />
+          </button>
 
           <nav className="hidden md:flex gap-8">
             <a href="#products" className="text-primary font-bold border-b-2 border-primary transition-all">Sản phẩm</a>
@@ -84,7 +164,7 @@ export default function App() {
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="fixed inset-0 top-16 z-40 bg-white md:hidden p-6"
+          className="fixed inset-0 top-20 z-40 bg-white md:hidden p-6"
         >
           <nav className="flex flex-col gap-6 text-lg font-medium">
             <a href="#products" onClick={() => setIsMenuOpen(false)}>Sản phẩm</a>
@@ -96,7 +176,7 @@ export default function App() {
         </motion.div>
       )}
 
-      <main className="pt-16">
+      <main className="pt-20">
         {/* Flash Sale Bar */}
         <div className="countdown-red w-full py-3">
           <div className="max-w-container-max mx-auto px-6 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
@@ -118,16 +198,16 @@ export default function App() {
             className="space-y-6"
           >
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1 rounded-full text-xs font-bold uppercase">
-              🏆 Nha sĩ khuyên dùng
+              🏆 Top 10 Thương Hiệu Uy Tín Quốc Gia 2024
             </div>
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
               Nước Súc Miệng <br />
               <span className="text-primary-container">Y Khoa DrKam</span>
             </h1>
             <p className="text-lg md:text-xl text-on-surface-variant max-w-lg leading-relaxed">
-              Tiêu diệt 99.9% vi khuẩn chỉ sau 30 giây. Công thức chuẩn y khoa dành riêng cho người gặp vấn đề về nướu và hôi miệng dai dẳng.
+              Công nghệ Postbiotic độc quyền — cân bằng hệ vi khuẩn có lợi trong miệng, không cồn, không chất bảo quản. An toàn cho cả phụ nữ mang thai và trẻ em.
             </p>
-            
+
             <div className="flex items-center gap-4 py-2 border-y border-primary/5">
               <div className="flex text-accent">
                 {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
@@ -137,9 +217,9 @@ export default function App() {
 
             <ul className="space-y-3">
               {[
-                "Không chứa cồn, không gây cay rát",
-                "Hết hôi miệng sau lần đầu sử dụng",
-                "Bảo vệ men răng suốt 24h"
+                "Không cồn, không chất bảo quản — dịu nhẹ mọi lứa tuổi",
+                "Postbiotic patent Mỹ — khoa học, không phải quảng cáo",
+                "An toàn cho phụ nữ mang thai & trẻ em từ 6 tuổi"
               ].map((item, id) => (
                 <li key={id} className="flex items-center gap-3 font-medium">
                   <CheckCircle2 className="text-green-600 w-5 h-5" />
@@ -150,7 +230,7 @@ export default function App() {
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button className="bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all">
-                ĐẶT HÀNG NGAY
+                ĐẶT HÀNG — MIỄN PHÍ VẬN CHUYỂN
               </button>
               <button className="border-2 border-primary text-primary px-8 py-4 rounded-xl text-lg font-bold hover:bg-primary/5 transition-all">
                 XEM COMBO TIẾT KIỆM
@@ -158,21 +238,13 @@ export default function App() {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="relative flex justify-center"
           >
-            <div className="absolute -z-10 w-full h-full bg-primary/5 rounded-full blur-3xl"></div>
-            <div className="w-full max-w-md aspect-[3/4] bg-primary-container rounded-2xl flex items-center justify-center text-white text-opacity-10 shadow-2xl overflow-hidden relative group">
-              <img 
-                className="w-full h-full object-cover mix-blend-overlay group-hover:scale-110 transition-transform duration-700" 
-                alt="Chai nước súc miệng DrKam cao cấp" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxZlXO-CMiP3-VuEmUC7eqdLV941HADkmzRMEgUJW1VAYbQyuckaeRlVFIho-OyKwFoawyHl-rZIgMKRME5_A290ffMiE70iJadai9SZpGyJByiH-PwPYntSOGgRR12gasgxhH5_5rasf1VyywR9q82dO2uRgWNnmW4sYvXaotbSz4T7B3EIhOz3lYQhnoQhMNo5CjYPfGEM1QY-UcrLkjhSoIBF_2I4FCERuvpjRfCcIYOMv5eGQEKD9PzUgljQ09bnchhDfD5Z8"
-              />
-              <span className="absolute text-6xl md:text-8xl font-black opacity-20 tracking-tighter select-none">DRKAM</span>
-            </div>
+            <HeroCarousel />
           </motion.div>
         </section>
 
@@ -181,9 +253,9 @@ export default function App() {
           <div className="max-w-container-max mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { icon: <ShieldCheck className="text-primary w-8 h-8" />, title: "Chuẩn Y Khoa", sub: "Chứng nhận Bộ Y Tế" },
-              { icon: <Award className="text-accent w-8 h-8" />, title: "Gold Award 2023", sub: "TP nha khoa xuất sắc" },
-              { icon: <Microscope className="text-primary w-8 h-8" />, title: "99.9% Sạch Khuẩn", sub: "Viện Pasteur kiểm định" },
-              { icon: <Truck className="text-primary w-8 h-8" />, title: "Free Ship", sub: "Đơn từ 500.000đ" }
+              { icon: <Award className="text-accent w-8 h-8" />, title: "Top 10 Uy Tín 2024", sub: "Thương hiệu uy tín quốc gia" },
+              { icon: <Microscope className="text-primary w-8 h-8" />, title: "Patent Mỹ US7666407B2", sub: "Công nghệ Postbiotic độc quyền" },
+              { icon: <Truck className="text-primary w-8 h-8" />, title: "Miễn Phí Vận Chuyển", sub: "Giao hàng toàn quốc & hoàn trả miễn phí" }
             ].map((item, id) => (
               <div key={id} className="flex items-center gap-4 bg-white p-6 rounded-xl shadow-sm border border-slate-100">
                 {item.icon}
@@ -199,15 +271,15 @@ export default function App() {
         {/* Core Benefits */}
         <section className="py-24 max-w-container-max mx-auto px-6">
           <div className="text-center mb-16 space-y-4">
-            <h2 className="text-3xl md:text-5xl font-bold text-primary-container">Tạm Biệt Mọi Vấn Đề Răng Miệng</h2>
-            <p className="text-lg text-on-surface-variant max-w-2xl mx-auto">Giải pháp toàn diện được nghiên cứu bởi các chuyên gia R&D hàng đầu tại DrKam.</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-primary-container">Chăm Sóc Răng Miệng Đúng Cách — Từ Gốc Rễ</h2>
+            <p className="text-lg text-on-surface-variant max-w-2xl mx-auto">DrKam không chỉ diệt khuẩn — mà cân bằng hệ vi sinh miệng để bảo vệ sức khoẻ răng lợi bền vững.</p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { emoji: "💨", title: "Hơi Thở Thơm Mát", desc: "Khử sạch mùi hôi miệng do vi khuẩn và thức ăn thừa, giữ hơi thở thơm mát tới 12 giờ." },
-              { emoji: "🦷", title: "Bảo Vệ Nướu Khỏe", desc: "Giảm sưng viêm nướu, ngăn ngừa tình trạng chảy máu chân răng và sâu răng hiệu quả." },
-              { emoji: "✨", title: "Trắng Răng Tự Nhiên", desc: "Công thức nhẹ nhàng đánh bay mảng bám mà không làm mòn hay ê buốt men răng." }
+              { emoji: "🦠", title: "Cân Bằng Vi Sinh Miệng", desc: "Công nghệ Postbiotic (Lactobacillus paracasei ADP-1) nuôi dưỡng vi khuẩn có lợi, ức chế vi khuẩn gây hại từ bên trong." },
+              { emoji: "🦷", title: "Giảm Viêm Nướu & Hôi Miệng", desc: "Chlorhexidine Digluconate chuẩn châu Âu kết hợp chiết xuất Salvadora Persica — giảm viêm, hết hôi miệng nhanh chóng và lâu dài." },
+              { emoji: "🤱", title: "An Toàn Cho Cả Gia Đình", desc: "Không cồn, không chất bảo quản, không gây kích ứng. Phù hợp với phụ nữ mang thai, cho con bú và trẻ em từ 6 tuổi." }
             ].map((benefit, id) => (
               <motion.div 
                 key={id}
@@ -231,12 +303,12 @@ export default function App() {
         <section className="bg-accent/5 py-24 border-y border-accent/10 overflow-hidden">
           <div className="max-w-container-max mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-8">
-              <h2 className="text-4xl md:text-5xl font-bold text-accent">Thành Phần Vàng <br />Chuẩn Y Khoa</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-accent">Thành Phần Được <br />Khoa Học Kiểm Chứng</h2>
               <div className="grid gap-4">
                 {[
-                  { num: "01", title: "Tinh dầu Bạc Hà", desc: "Kháng khuẩn và mang lại cảm giác sảng khoái tức thì." },
-                  { num: "02", title: "Chiết xuất Trà Xanh", desc: "Chất chống oxy hóa tự nhiên giúp bảo vệ tế bào nướu." },
-                  { num: "03", title: "Xylitol Tự Nhiên", desc: "Ngăn chặn vi khuẩn gây sâu răng bám trên bề mặt." }
+                  { num: "01", title: "Postbiotic Lactobacillus paracasei ADP-1", desc: "Vi khuẩn có lợi được bất hoạt — cân bằng hệ vi sinh miệng, giảm viêm. Bảo hộ bởi patent Mỹ US7666407B2." },
+                  { num: "02", title: "Chlorhexidine Digluconate", desc: "Hoạt chất kháng khuẩn phổ rộng chuẩn châu Âu — loại bỏ vi khuẩn gây viêm nướu và mảng bám hiệu quả." },
+                  { num: "03", title: "Chiết xuất Salvadora Persica", desc: "Thành phần thảo dược được WHO công nhận — làm sạch tự nhiên, kháng viêm, bảo vệ men răng." }
                 ].map((ing, idx) => (
                   <div key={idx} className="bg-white p-5 rounded-xl shadow-sm flex gap-4 border border-accent/5">
                     <div className="w-12 h-12 bg-accent text-white rounded-lg flex items-center justify-center shrink-0 font-black text-xl">
@@ -262,33 +334,42 @@ export default function App() {
               <div className="space-y-3">
                 <details className="group bg-white p-4 rounded-xl shadow-sm cursor-pointer border border-slate-100">
                   <summary className="flex justify-between items-center font-bold text-on-surface list-none">
-                    Tại sao nên chọn DrKam thay vì các loại thông thường?
+                    DrKam khác gì so với nước súc miệng thông thường?
                     <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180" />
                   </summary>
                   <p className="pt-4 text-sm text-on-surface-variant italic">
-                    DrKam được kiểm định lâm sàng với nồng độ hoạt chất tối ưu, loại bỏ hoàn toàn cồn gây khô miệng.
+                    Hầu hết nước súc miệng thị trường dùng cồn và hoá chất mạnh — diệt cả vi khuẩn có lợi, gây khô miệng. DrKam dùng Postbiotic (patent Mỹ) để cân bằng vi sinh — không cồn, không chất bảo quản, hiệu quả bền vững hơn.
                   </p>
                 </details>
                 <details className="group bg-white p-4 rounded-xl shadow-sm cursor-pointer border border-slate-100">
                   <summary className="flex justify-between items-center font-bold text-on-surface list-none">
-                    Sản phẩm có an toàn cho trẻ em không?
+                    Phụ nữ mang thai và trẻ em có dùng được không?
                     <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180" />
                   </summary>
                   <p className="pt-4 text-sm text-on-surface-variant italic">
-                    An toàn cho trẻ em từ 6 tuổi trở lên dưới sự giám sát của người lớn.
+                    Có. Công thức không cồn, không chất bảo quản của DrKam được thiết kế an toàn cho phụ nữ mang thai, đang cho con bú và trẻ em từ 6 tuổi. Đây là điểm khác biệt mà rất ít thương hiệu nào trên thị trường có được.
+                  </p>
+                </details>
+                <details className="group bg-white p-4 rounded-xl shadow-sm cursor-pointer border border-slate-100">
+                  <summary className="flex justify-between items-center font-bold text-on-surface list-none">
+                    Tư vấn 24/7 hoạt động như thế nào?
+                    <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180" />
+                  </summary>
+                  <p className="pt-4 text-sm text-on-surface-variant italic">
+                    Đội ngũ chuyên gia DrKam trực tư vấn 24/7 qua hotline 0917.05.99.33 và Zalo. Bạn sẽ được tư vấn đúng sản phẩm phù hợp tình trạng răng miệng cụ thể, hoàn toàn miễn phí.
                   </p>
                 </details>
               </div>
 
               <div className="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-primary relative">
                 <p className="italic text-lg text-on-surface-variant mb-6 leading-relaxed">
-                  "Chúng tôi cam kết sử dụng nguồn nguyên liệu sạch, được kiểm định khắt khe nhất để bảo vệ nụ cười Việt."
+                  "Chúng tôi không chạy theo xu hướng — chúng tôi chạy theo khoa học. Mỗi thành phần trong DrKam đều có nghiên cứu lâm sàng và bằng chứng thực tiễn đứng sau."
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-1 bg-primary h-8 rounded-full"></div>
                   <div>
-                    <p className="font-bold text-primary">Đội ngũ R&D DrKam</p>
-                    <p className="text-xs uppercase tracking-tighter text-on-surface-variant">Medical Excellence</p>
+                    <p className="font-bold text-primary">Bộ phận Nghiên cứu & Phát triển DrKam</p>
+                    <p className="text-xs uppercase tracking-tighter text-on-surface-variant">Postbiotic · Patent US7666407B2</p>
                   </div>
                 </div>
               </div>
@@ -368,9 +449,9 @@ export default function App() {
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { name: "Minh Anh", review: "Mình bị hôi miệng lâu năm, dùng đủ loại không hết. Từ khi đổi sang DrKam cảm thấy tự tin hẳn, hơi thở thơm mát cả ngày." },
-                { name: "Hoàng Nam", review: "Sản phẩm không hề cay như các loại khác, vị rất thanh. Răng cũng bớt mảng bám hẳn sau khi dùng hết combo đầu tiên." },
-                { name: "Chị Lan", review: "Đã mua combo 3 chai cho cả nhà dùng. Ai cũng khen. Sẽ tiếp tục ủng hộ DrKam lâu dài vì sự uy tín và chất lượng." }
+                { name: "Minh Anh", review: "Mình bị hôi miệng dai dẳng nhiều năm, thử đủ loại có thương hiệu đều không khỏi. Dùng DrKam được 2 tuần là hơi thở thơm hẳn — quan trọng nhất là không bị cay hay khô miệng như các loại khác." },
+                { name: "Hoàng Nam", review: "Vợ mình đang mang thai lo không dùng được nước súc miệng vì sợ cồn. DrKam không cồn, không chất bảo quản — bác sĩ cũng gật đầu. Cả nhà giờ đều dùng chung một sản phẩm." },
+                { name: "Chị Lan", review: "Ban đầu hoài nghi vì giá không rẻ, nhưng thử 1 chai xong mua ngay combo 3 chai cho cả nhà. Con tôi 8 tuổi dùng cũng an toàn. Không còn lo chảy máu chân răng mỗi sáng nữa." }
               ].map((user, id) => (
                 <div key={id} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col">
                   <div className="flex text-accent gap-1 mb-6">
@@ -396,8 +477,8 @@ export default function App() {
         <section className="py-24 max-w-container-max mx-auto px-6">
           <div className="bg-white rounded-[40px] shadow-2xl overflow-hidden grid lg:grid-cols-2">
             <div className="p-8 md:p-16 space-y-8">
-              <h2 className="text-4xl md:text-5xl font-bold leading-tight">Nhận Tư Vấn Miễn Phí <br />Từ Dược Sĩ Chuyên Môn</h2>
-              <p className="text-on-surface-variant text-lg">Để lại thông tin, đội ngũ chuyên gia của chúng tôi sẽ liên hệ tư vấn lộ trình chăm sóc răng miệng phù hợp nhất với bạn.</p>
+              <h2 className="text-4xl md:text-5xl font-bold leading-tight">Tư Vấn 24/7 <br />Hoàn Toàn Miễn Phí</h2>
+              <p className="text-on-surface-variant text-lg">Mỗi người có tình trạng răng miệng khác nhau. Để lại thông tin — chuyên gia DrKam sẽ tư vấn đúng sản phẩm, đúng liều lượng, đúng lộ trình cho bạn.</p>
               
               <form className="space-y-4" onSubmit={e => e.preventDefault()}>
                 <div className="space-y-1">
@@ -413,7 +494,7 @@ export default function App() {
                   <textarea placeholder="Mô tả tình trạng hiện tại của bạn..." className="w-full p-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:ring-2 focus:ring-primary outline-none h-32 resize-none transition-all" />
                 </div>
                 <button className="w-full bg-primary text-white py-4 rounded-2xl font-bold text-lg hover:ambient-shadow transition-all uppercase tracking-widest mt-4">
-                  Gửi yêu cầu tư vấn ngay
+                  Nhận tư vấn miễn phí ngay
                 </button>
               </form>
             </div>
@@ -451,12 +532,11 @@ export default function App() {
       <footer className="bg-on-surface text-surface py-20 px-6 border-t border-white/5">
         <div className="max-w-container-max mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="space-y-6 lg:col-span-2 max-w-md">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="text-primary w-10 h-10" />
-              <span className="text-3xl font-black text-primary tracking-tighter uppercase">DrKam Vietnam</span>
+            <div className="flex items-center">
+              <img src={logoImg} alt="DrKam" className="h-20 w-auto object-contain bg-white rounded-xl p-2" />
             </div>
             <p className="text-surface/60 leading-relaxed text-sm">
-              Giải pháp chăm sóc răng miệng y khoa cao cấp, mang đến nụ cười tự tin và sức khỏe bền vững cho cộng đồng Việt Nam qua tiêu chuẩn khoa học khắt khe nhất.
+              Thương hiệu chăm sóc răng miệng y khoa ứng dụng công nghệ Postbiotic độc quyền — không cồn, không chất bảo quản, an toàn cho cả gia đình. Top 10 Thương Hiệu Uy Tín Quốc Gia 2024.
             </p>
             <div className="flex gap-4 pt-4">
               <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary transition-all cursor-pointer">
@@ -479,9 +559,9 @@ export default function App() {
           <div>
             <h5 className="font-bold mb-6 text-accent uppercase tracking-widest text-xs">Thông tin liên hệ</h5>
             <ul className="space-y-4 text-sm text-surface/60">
-              <li className="flex gap-3"><MapPin className="w-4 h-4 shrink-0 text-primary" /> 123 ABC, Quận 1, TP. Hồ Chí Minh</li>
+              <li className="flex gap-3"><MapPin className="w-4 h-4 shrink-0 text-primary" /> Phường Yên Hoà, Cầu Giấy, Hà Nội</li>
               <li className="flex gap-3"><Phone className="w-4 h-4 shrink-0 text-primary" /> 0917.05.99.33</li>
-              <li className="flex gap-3"><Mail className="w-4 h-4 shrink-0 text-primary" /> contact@drkam.vn</li>
+              <li className="flex gap-3"><Mail className="w-4 h-4 shrink-0 text-primary" /> Drkamvietnam@gmail.com</li>
             </ul>
           </div>
         </div>
