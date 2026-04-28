@@ -46,6 +46,7 @@ const OVERVIEW_IMAGES = [overviewImg1, overviewImg2, overviewImg3, overviewImg4,
 function HeroCarousel() {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const touchStartX = useRef<number | null>(null);
   const total = OVERVIEW_IMAGES.length;
 
   const resetTimer = () => {
@@ -65,8 +66,25 @@ function HeroCarousel() {
     resetTimer();
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 50) {
+      goTo(delta > 0 ? current + 1 : current - 1);
+    }
+    touchStartX.current = null;
+  };
+
   return (
-    <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-2xl group select-none">
+    <div
+      className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-2xl group select-none"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Slide strip */}
       <div
         className="flex h-full transition-transform duration-500 ease-in-out"
@@ -340,10 +358,21 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              <div className="flex flex-wrap gap-4 pt-4">
-                {["KHÔNG CỒN", "KHÔNG ĐƯỜNG", "KHÔNG CAY", "THIÊN NHIÊN"].map((label, id) => (
-                  <div key={id} className="w-20 h-20 rounded-full border-2 border-accent/30 flex items-center justify-center text-[10px] font-bold text-center p-2 leading-tight uppercase text-accent">
-                    {label}
+              <div className="flex flex-wrap gap-2 pt-6">
+                {[
+                  { label: "Không cồn",   dot: "bg-accent" },
+                  { label: "Không đường", dot: "bg-accent" },
+                  { label: "Không cay",   dot: "bg-accent" },
+                  { label: "Thiên nhiên", dot: "bg-green-500" },
+                ].map((item, id) => (
+                  <div
+                    key={id}
+                    className="inline-flex items-center gap-2 bg-white border border-accent/25 px-4 py-2 rounded-full shadow-sm hover:border-accent hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default"
+                  >
+                    <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${item.dot}`} />
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-accent whitespace-nowrap">
+                      {item.label}
+                    </span>
                   </div>
                 ))}
               </div>
