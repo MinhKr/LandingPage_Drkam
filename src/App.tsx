@@ -26,6 +26,10 @@ import {
 import { useState, useEffect, useRef } from 'react';
 
 import logoImg from '../Images/logo_Drkam.jpg';
+import comboImg1 from '../Images/Combo/combo1.jpeg';
+import comboImg2 from '../Images/Combo/combo2.jpeg';
+import comboImg3 from '../Images/Combo/combo3.jpg';
+import comboImg5 from '../Images/Combo/combo5.jpg';
 import overviewImg1 from '../Images/Overview/image1.jpeg';
 import overviewImg2 from '../Images/Overview/image2.png';
 import overviewImg3 from '../Images/Overview/image3.jpeg';
@@ -164,10 +168,10 @@ export default function App() {
           </button>
 
           <nav className="hidden md:flex gap-8">
-            <a href="#products" className="text-primary font-bold border-b-2 border-primary transition-all">Sản phẩm</a>
-            <a href="#clinical" className="text-on-surface-variant hover:text-primary transition-colors">Bằng chứng lâm sàng</a>
-            <a href="#about" className="text-on-surface-variant hover:text-primary transition-colors">Về chúng tôi</a>
-            <a href="#blog" className="text-on-surface-variant hover:text-primary transition-colors">Blog</a>
+            <a href="#overview" className="text-on-surface-variant hover:text-primary transition-colors">Tổng quan</a>
+            <a href="#ingredients" className="text-on-surface-variant hover:text-primary transition-colors">Thành phần</a>
+            <a href="#reviews" className="text-on-surface-variant hover:text-primary transition-colors">Đánh giá</a>
+            <a href="#products" className="text-on-surface-variant hover:text-primary transition-colors">Sản phẩm</a>
             <a href="#contact" className="text-on-surface-variant hover:text-primary transition-colors">Liên hệ</a>
           </nav>
 
@@ -193,16 +197,16 @@ export default function App() {
           className="fixed inset-0 top-20 z-40 bg-white md:hidden p-6"
         >
           <nav className="flex flex-col gap-6 text-lg font-medium">
+            <a href="#overview" onClick={() => setIsMenuOpen(false)}>Tổng quan</a>
+            <a href="#ingredients" onClick={() => setIsMenuOpen(false)}>Thành phần</a>
+            <a href="#reviews" onClick={() => setIsMenuOpen(false)}>Đánh giá</a>
             <a href="#products" onClick={() => setIsMenuOpen(false)}>Sản phẩm</a>
-            <a href="#clinical" onClick={() => setIsMenuOpen(false)}>Bằng chứng lâm sàng</a>
-            <a href="#about" onClick={() => setIsMenuOpen(false)}>Về chúng tôi</a>
-            <a href="#blog" onClick={() => setIsMenuOpen(false)}>Blog</a>
             <a href="#contact" onClick={() => setIsMenuOpen(false)}>Liên hệ</a>
           </nav>
         </motion.div>
       )}
 
-      <main className="pt-20">
+      <main className="pt-20 pb-20 md:pb-0">
         {/* Flash Sale Bar */}
         <div className="countdown-red w-full py-3">
           <div className="max-w-container-max mx-auto px-6 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
@@ -216,7 +220,7 @@ export default function App() {
         </div>
 
         {/* Hero Section */}
-        <section className="max-w-container-max mx-auto px-6 py-12 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+        <section id="overview" className="scroll-mt-20 max-w-container-max mx-auto px-6 py-12 md:py-24 grid md:grid-cols-2 gap-12 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -337,8 +341,8 @@ export default function App() {
         </section>
 
         {/* Ingredients & FAQ Section */}
-        <section className="bg-accent/5 py-24 border-y border-accent/10 overflow-hidden">
-          <div className="max-w-container-max mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+        <section id="ingredients" className="scroll-mt-20 bg-accent/5 py-24 border-y border-accent/10 overflow-hidden">
+          <div className="max-w-container-max mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="space-y-8">
               <h2 className="text-4xl md:text-5xl font-bold text-accent">Thành Phần Được <br />Khoa Học Kiểm Chứng</h2>
               <div className="grid gap-4">
@@ -426,7 +430,7 @@ export default function App() {
         </section>
 
         {/* Reviews Section */}
-        <section className="py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #fff8f7, #f8f4f0)' }}>
+        <section id="reviews" className="scroll-mt-20 py-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #fff8f7, #f8f4f0)' }}>
           {/* Header */}
           <div className="max-w-container-max mx-auto px-6 mb-12 text-center">
             <motion.div
@@ -527,72 +531,211 @@ export default function App() {
         </section>
 
         {/* Pricing Combos */}
-        <section id="products" className="py-24 max-w-container-max mx-auto px-6">
-          <div className="text-center mb-16 space-y-6">
-            <h2 className="text-3xl md:text-5xl font-bold">Lựa Chọn Combo Tiết Kiệm</h2>
-            <div className="flex flex-wrap justify-center gap-3">
-              <button className="bg-primary text-white px-6 py-2 rounded-full font-bold text-sm">Dành cho bạn</button>
-              <button className="bg-slate-100 text-slate-600 px-6 py-2 rounded-full font-bold text-sm hover:bg-slate-200">Cho gia đình</button>
-              <button className="bg-slate-100 text-slate-600 px-6 py-2 rounded-full font-bold text-sm hover:bg-slate-200">Mua làm quà</button>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 items-stretch pt-8">
-            {/* Combo 1 */}
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 flex flex-col hover:ambient-shadow transition-all">
-              <div className="w-full aspect-[4/5] bg-slate-50 rounded-xl mb-6 overflow-hidden flex items-center justify-center border border-slate-100">
-                <img className="w-3/4 object-contain" alt="01 Chai DrKam 500ml" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgH3udMJY_jU50BPu2SQuSQ7qimjiPQwgufGtBuWmWp6cnwiN-Ru2Y0cd9uU0v5AR6VJ0zOLKh2DZ09E4MvAfgnC_M4AYcPEUC620yiXNyts_X8MGevhI-sHptBK-_O7VBQUsWqVeu_KjiJ1Ca4_QMGm1dLtpFieMO2qTAxsqFZnaMNIp34LdK-IdbqQuzFowc_r7VFv67pkDqsQgdXsilSSOI9svFCOK91vQyOSuGvD265TZ5mBRAtOhj_4N_K0WxVAQPj24JZvU" />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">Combo Trải Nghiệm</h3>
-              <p className="text-slate-500 mb-4">01 Chai 500ml</p>
-              <p className="text-3xl font-black text-primary mb-6">199.000đ</p>
-              <ul className="text-sm space-y-3 mb-8 flex-grow">
-                <li className="flex items-center gap-2">📍 Miễn phí ship từ 2 chai</li>
-                <li className="flex items-center gap-2 font-bold text-green-600">✨ Tặng 1 bàn chải mềm</li>
-              </ul>
-              <button className="w-full border-2 border-primary text-primary py-3 rounded-xl font-bold hover:bg-primary/5 transition-all uppercase text-sm">CHỌN COMBO</button>
+        <section id="products" className="scroll-mt-20 py-24 bg-gradient-to-b from-white to-slate-50/60">
+          <div className="max-w-container-max mx-auto px-6">
+            {/* Header */}
+            <div className="text-center mb-8 space-y-3">
+<h2 className="text-3xl md:text-5xl font-bold">Mua Càng Nhiều — Tiết Kiệm Càng Lớn</h2>
             </div>
 
-            {/* Combo 2 - HERO */}
-            <div className="bg-white rounded-3xl p-8 shadow-2xl border-4 border-accent flex flex-col relative scale-105 z-10 overflow-hidden transform hover:-translate-y-2 transition-all">
-              <div className="absolute top-0 left-0 w-full gold-prestige text-center py-2 text-xs font-black tracking-widest uppercase">BÁN CHẠY NHẤT</div>
-              <div className="w-full aspect-[4/5] bg-slate-50 rounded-xl mt-4 mb-6 overflow-hidden flex items-center justify-center border border-slate-100">
-                <img className="w-full object-cover scale-110" alt="Combo 3 chai DrKam" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJT2Apvfw95IsTsrZ9WXRlbfNuMKAaBjgFi9_hvwpHSKjFrNPr4T73D-xNj42jA0_ewXwSG-u5mIFyAwjGH3UjxLaM3IB63Hl1_SKm17ld-QAEspf-jpS0j03_GrzbKrJWDpxV3RhIQPL2JAXqtcHG4jnHxDq2uK7qVhbjnxaZf5nlfpVVStvtgEL2GAgJ_xOEhCuaiVDRfFpAGkFkw0R_hKbVSRbbvaf5L8uS7ogFnGBVkEe0QS_xWvTEdejtj8E09dkpLSpKwTU" />
+            {/* Value progression bar */}
+            <div className="flex justify-center mb-10">
+              <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-1 bg-white border border-slate-200 rounded-2xl px-6 py-3 shadow-sm text-xs font-bold">
+                <span className="text-slate-400">1 chai · 180k</span>
+                <span className="text-slate-300 hidden sm:inline">→</span>
+                <span className="text-primary">2 chai · tiết kiệm 32k + quà</span>
+                <span className="text-slate-300 hidden sm:inline">→</span>
+                <span className="text-accent">3 chai · + bộ 5 sản phẩm</span>
+                <span className="text-slate-300 hidden sm:inline">→</span>
+                <span className="text-green-600 font-black">5 chai · 1 chai miễn phí + bộ quà</span>
               </div>
-              <h3 className="text-2xl font-bold mb-2">Combo Toàn Diện</h3>
-              <p className="text-slate-500 mb-4">03 Chai + Quà Tặng VIP</p>
-              <div className="flex flex-col mb-6">
-                <span className="text-slate-400 line-through text-sm font-medium">597.000đ</span>
-                <p className="text-4xl font-black text-red-600">499.000đ</p>
-              </div>
-              <ul className="text-sm space-y-3 mb-8 flex-grow font-medium">
-                <li className="flex items-center gap-2">✅ Miễn phí giao hàng toàn quốc</li>
-                <li className="flex items-center gap-2 text-primary font-bold">🎁 Tặng máy tăm nước mini</li>
-                <li className="flex items-center gap-2">⭐ Ưu tiên CSKH chuyên sâu</li>
-              </ul>
-              <button className="w-full bg-primary text-white py-4 rounded-xl font-black shadow-lg hover:bg-primary-container transition-all uppercase tracking-widest animate-pulse">ĐẶT NGAY GIẢM 15%</button>
             </div>
 
-            {/* Combo 3 */}
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 flex flex-col hover:ambient-shadow transition-all">
-              <div className="w-full aspect-[4/5] bg-slate-50 rounded-xl mb-6 overflow-hidden flex items-center justify-center border border-slate-100">
-                <img className="w-3/4 object-contain" alt="02 Chai DrKam" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1UfUCG8m9M0EcEOWAntHPEcljmPWdwx4uLFAzutE_gUdfR0vdvlE_uTb-LNEl2mNIxevp9I_Dp9I7AZOiGVpy037fS0iu5POCmHr1NbkJJVklnBbTXiqiGf4sT3CyyP8uhxhhPlF39MGporJ-3OI9rOYP9KeXKZR4ctb30SkEody92INVG_dwHk2RAqZ1054vWnMjWdVblCNWHNFSSRLwkwnFqUUlPijjyXK66Ulp6W3Raqjr9aNC_XW5t7cxRcQorQbwPCfvj5w" />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">Combo Gia Đình</h3>
-              <p className="text-slate-500 mb-4">02 Chai 500ml</p>
-              <p className="text-3xl font-black text-primary mb-6">350.000đ</p>
-              <ul className="text-sm space-y-3 mb-8 flex-grow">
-                <li className="flex items-center gap-2">📍 Miễn phí giao hàng</li>
-                <li className="flex items-center gap-2 text-secondary font-bold">✨ Tặng 2 bàn chải cao cấp</li>
-              </ul>
-              <button className="w-full border-2 border-primary text-primary py-3 rounded-xl font-bold hover:bg-primary/5 transition-all uppercase text-sm">CHỌN COMBO</button>
+            {/* Top 2 combos: Combo 1 (nhỏ) + Combo 2 HOT (lớn) */}
+            <div className="grid md:grid-cols-5 gap-6 mb-6">
+              {/* Combo 1 — Trải nghiệm */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="md:col-span-2 bg-white rounded-2xl p-7 shadow-sm border border-slate-100 flex flex-col hover:shadow-md transition-all"
+              >
+                <div className="flex items-center justify-between mb-5">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-1">Combo 1 chai</p>
+                    <h3 className="text-xl font-bold">Trải Nghiệm</h3>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-2xl font-black text-primary">180k</p>
+                    <p className="text-[11px] text-slate-400 font-medium">= 180k/chai</p>
+                  </div>
+                </div>
+
+                <div className="w-full aspect-[3/2] rounded-xl mb-5 overflow-hidden">
+                  <img src={comboImg1} alt="Combo 1 chai nước súc miệng DrKam 500ml" className="w-full h-full object-cover" />
+                </div>
+
+                <div className="flex-grow space-y-2 mb-6">
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Bao gồm</p>
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="w-5 h-5 bg-primary/10 text-primary rounded-full flex items-center justify-center text-[10px] font-black shrink-0">1</span>
+                    <span className="font-medium">Chai nước súc miệng DrKam 500ml</span>
+                  </div>
+                </div>
+
+                <button className="w-full border-2 border-primary text-primary py-3 rounded-xl font-bold hover:bg-primary/5 transition-all text-sm uppercase tracking-wide">
+                  Chọn combo này
+                </button>
+              </motion.div>
+
+              {/* Combo 2 — HOT NHẤT */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                viewport={{ once: true }}
+                className="md:col-span-3 bg-white rounded-3xl shadow-2xl border-2 border-accent flex flex-col relative overflow-hidden hover:-translate-y-1 transition-all"
+              >
+                <div className="gold-prestige text-center py-2.5 text-xs font-black tracking-widest uppercase px-4">
+                  🔥 BÁN CHẠY NHẤT — ĐƯỢC CHỌN NHIỀU NHẤT
+                </div>
+
+                <div className="p-7 flex flex-col flex-grow">
+                  <div className="flex items-start justify-between mb-5">
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-widest text-accent mb-1">Combo 2 chai</p>
+                      <h3 className="text-2xl font-bold">Combo Đôi</h3>
+                      <p className="text-sm text-slate-500 mt-1">Dùng lâu dài + tặng quà</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-3xl font-black text-red-600">328.300đ</p>
+                      <p className="text-[11px] text-accent font-bold bg-accent/10 px-2 py-0.5 rounded-full mt-1">164k/chai · tiết kiệm 32k</p>
+                    </div>
+                  </div>
+
+                  <div className="w-full aspect-[16/7] rounded-xl mb-5 overflow-hidden">
+                    <img src={comboImg2} alt="Combo 2 chai nước súc miệng DrKam + 2 kem đánh răng Sinh Học" className="w-full h-full object-cover" />
+                  </div>
+
+                  <div className="flex-grow space-y-2 mb-6">
+                    <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Bao gồm</p>
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="w-5 h-5 bg-primary/10 text-primary rounded-full flex items-center justify-center text-[10px] font-black shrink-0">2</span>
+                      <span className="font-medium">Chai nước súc miệng DrKam 500ml</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="w-5 h-5 bg-green-100 text-green-700 rounded-full flex items-center justify-center shrink-0 text-[10px]">🎁</span>
+                      <span className="font-bold text-green-700">Tặng 2 kem đánh răng Sinh Học</span>
+                    </div>
+                  </div>
+
+                  <button className="w-full bg-primary text-white py-4 rounded-xl font-black shadow-lg hover:bg-primary-container transition-all uppercase tracking-widest">
+                    Đặt ngay — Miễn ship
+                  </button>
+                </div>
+              </motion.div>
             </div>
+
+            {/* Bottom 2 combos */}
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Combo 3 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100 flex flex-col hover:shadow-md transition-all"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-1">Combo 3 chai</p>
+                    <h3 className="text-xl font-bold">Combo Gia Đình</h3>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-2xl font-black text-primary">532.800đ</p>
+                    <p className="text-[10px] text-slate-400">+ bộ quà 5 sản phẩm</p>
+                  </div>
+                </div>
+
+                <div className="w-full aspect-[16/9] rounded-xl mb-4 overflow-hidden">
+                  <img src={comboImg3} alt="Combo 3 chai DrKam + bộ quà tặng 5 sản phẩm" className="w-full h-full object-cover" />
+                </div>
+
+                <div className="flex-grow space-y-1.5 mb-5 text-sm">
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Bao gồm</p>
+                  <div className="flex items-start gap-2">
+                    <span className="w-5 h-5 bg-primary/10 text-primary rounded-full flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">3</span>
+                    <span className="font-medium">Chai nước súc miệng DrKam 500ml</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="w-5 h-5 bg-green-100 text-green-700 rounded-full flex items-center justify-center shrink-0 text-[10px] mt-0.5">🎁</span>
+                    <div className="text-green-700 font-bold text-xs leading-relaxed">
+                      Tặng: 1 kem đánh răng Sinh Học · 1 chai súc miệng Sinh Học · 1 cạo lưỡi · 1 bàn chải đa năng · 1 bộ tăm chỉ nha khoa
+                    </div>
+                  </div>
+                </div>
+
+                <button className="w-full border-2 border-primary text-primary py-3 rounded-xl font-bold hover:bg-primary/5 transition-all text-sm uppercase tracking-wide">
+                  Chọn combo này
+                </button>
+              </motion.div>
+
+              {/* Combo 5 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-7 shadow-sm border border-green-100 flex flex-col hover:shadow-md transition-all relative"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="min-w-0 flex-1 pr-3">
+                    <div className="inline-flex items-center bg-green-500 text-white text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wide mb-1.5">
+                      Tiết kiệm nhất
+                    </div>
+                    <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-1">Combo 5 chai</p>
+                    <h3 className="text-xl font-bold">Combo Tích Trữ</h3>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-2xl font-black text-primary">888.000đ</p>
+                    <p className="text-[10px] text-green-600 font-bold">~148k/chai*</p>
+                  </div>
+                </div>
+
+                <div className="w-full aspect-[16/9] rounded-xl mb-4 overflow-hidden">
+                  <img src={comboImg5} alt="Combo 5 chai DrKam + 1 chai tặng + bộ quà tặng" className="w-full h-full object-cover" />
+                </div>
+
+                <div className="flex-grow space-y-1.5 mb-5 text-sm">
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Bao gồm</p>
+                  <div className="flex items-start gap-2">
+                    <span className="w-5 h-5 bg-primary/10 text-primary rounded-full flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">5</span>
+                    <span className="font-medium">Chai nước súc miệng DrKam 500ml</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="w-5 h-5 bg-green-100 text-green-700 rounded-full flex items-center justify-center shrink-0 text-[10px] mt-0.5">🎁</span>
+                    <div className="text-green-700 font-bold text-xs leading-relaxed">
+                      Tặng 1 chai + Bộ Quà Tặng: 1 kem đánh răng Sinh Học · 1 chai súc miệng Sinh Học · 1 cạo lưỡi · 1 bàn chải đa năng
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-slate-400 pl-7">*tính cả 1 chai tặng = 6 chai / 888k</p>
+                </div>
+
+                <button className="w-full bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition-all text-sm uppercase tracking-wide shadow-md">
+                  Chọn combo tiết kiệm nhất
+                </button>
+              </motion.div>
+            </div>
+
+            {/* Bottom note */}
+            <p className="text-center text-xs text-slate-400 mt-8">
+              Tất cả combo miễn phí vận chuyển toàn quốc · Quà tặng áp dụng theo chương trình hiện hành · Liên hệ hotline <span className="font-bold text-primary">0917.05.99.33</span> để được tư vấn combo phù hợp
+            </p>
           </div>
         </section>
 
         {/* Consultation Form with Pharmacist Image */}
-        <section className="py-24 max-w-container-max mx-auto px-6">
-          <div className="bg-white rounded-[40px] shadow-2xl overflow-hidden grid lg:grid-cols-2">
+        <section id="contact" className="scroll-mt-20 py-24 max-w-container-max mx-auto px-6">
+          <div className="bg-white rounded-2xl md:rounded-[40px] shadow-2xl overflow-hidden grid lg:grid-cols-2">
             <div className="p-8 md:p-16 space-y-8">
               <h2 className="text-4xl md:text-5xl font-bold leading-tight">Tư Vấn 24/7 <br />Hoàn Toàn Miễn Phí</h2>
               <p className="text-on-surface-variant text-lg">Mỗi người có tình trạng răng miệng khác nhau. Để lại thông tin — chuyên gia DrKam sẽ tư vấn đúng sản phẩm, đúng liều lượng, đúng lộ trình cho bạn.</p>
@@ -616,7 +759,7 @@ export default function App() {
               </form>
             </div>
 
-            <div className="relative group overflow-hidden bg-slate-100 flex items-center justify-center min-h-[500px]">
+            <div className="relative group overflow-hidden bg-slate-100 flex items-center justify-center min-h-[260px] lg:min-h-[500px]">
               <img 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                 alt="Dược sĩ chuyên môn DrKam" 
