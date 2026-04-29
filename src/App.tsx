@@ -47,6 +47,16 @@ import reviewImg8 from '../Images/reviews/review-8.png';
 
 const OVERVIEW_IMAGES = [overviewImg1, overviewImg2, overviewImg3, overviewImg4, overviewImg5, overviewImg6];
 
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzI_XoCYuiC9dRKk693GIlsaPJFIVs_kChVGwYNdxdmtyBI3edGe318a60mD1aa8Ps/exec";
+
+const COMBOS = [
+  { id: "1chai",  label: "Mua 1 chai súc miệng = 219k miễn ship", hot: false },
+  { id: "2chai",  label: "Mua 2 chai súc miệng tặng 2 kem đánh răng Sinh Học = 370k miễn ship", hot: true },
+  { id: "3chai",  label: "Mua 3 chai súc miệng tặng 1 kem đánh răng Sinh Học, 1 chai súc miệng Sinh Học, 1 cạo lưỡi, 1 bàn chải đa năng, 1 bộ tăm chỉ nha khoa = 585k miễn ship", hot: false },
+  { id: "5chai",  label: "Mua 5 chai súc miệng tặng 1 chai và tặng kèm thêm Bộ Quà Tặng: 1 kem đánh răng Sinh Học, 1 chai súc miệng Sinh Học, 1 cạo lưỡi, 1 bàn chải đa năng = 975k miễn ship", hot: false },
+  { id: "10chai", label: "Mua 10 chai súc miệng tặng 4 chai và tặng kèm 1 chai súc miệng Sinh Học = 1.950k miễn ship", hot: false },
+];
+
 function HeroCarousel() {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -137,6 +147,46 @@ function HeroCarousel() {
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 45, seconds: 12 });
+
+  const [formName, setFormName] = useState('');
+  const [formPhone, setFormPhone] = useState('');
+  const [formAddress, setFormAddress] = useState('');
+  const [formCombo, setFormCombo] = useState('');
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleOrderSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const errors: Record<string, string> = {};
+    if (!formName.trim())  errors.name    = 'Vui lòng nhập họ và tên';
+    if (!formPhone.trim()) errors.phone   = 'Vui lòng nhập số điện thoại';
+    if (!formAddress.trim()) errors.address = 'Vui lòng nhập địa chỉ';
+    if (!formCombo)        errors.combo   = 'Vui lòng chọn combo';
+    if (Object.keys(errors).length > 0) { setFormErrors(errors); return; }
+    setFormErrors({});
+    setIsSubmitting(true);
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          timestamp: new Date().toLocaleString('vi-VN'),
+          name: formName,
+          phone: formPhone,
+          address: formAddress,
+          combo: COMBOS.find(c => c.id === formCombo)?.label ?? formCombo,
+        }),
+      });
+      setSubmitStatus('success');
+      setFormName(''); setFormPhone(''); setFormAddress(''); setFormCombo('');
+    } catch {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Countdown timer logic
   useEffect(() => {
@@ -733,48 +783,109 @@ export default function App() {
           </div>
         </section>
 
-        {/* Consultation Form with Pharmacist Image */}
-        <section id="contact" className="scroll-mt-20 py-24 max-w-container-max mx-auto px-6">
-          <div className="bg-white rounded-2xl md:rounded-[40px] shadow-2xl overflow-hidden grid lg:grid-cols-2">
-            <div className="p-8 md:p-16 space-y-8">
-              <h2 className="text-4xl md:text-5xl font-bold leading-tight">Tư Vấn 24/7 <br />Hoàn Toàn Miễn Phí</h2>
-              <p className="text-on-surface-variant text-lg">Mỗi người có tình trạng răng miệng khác nhau. Để lại thông tin — chuyên gia DrKam sẽ tư vấn đúng sản phẩm, đúng liều lượng, đúng lộ trình cho bạn.</p>
-              
-              <form className="space-y-4" onSubmit={e => e.preventDefault()}>
-                <div className="space-y-1">
-                  <label className="text-xs font-bold text-on-surface-variant uppercase ml-2">Họ và tên</label>
-                  <input type="text" placeholder="Họ và tên của bạn" className="w-full p-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:ring-2 focus:ring-primary outline-none transition-all" />
+        {/* Order Form */}
+        <section id="contact" className="scroll-mt-20 py-16 md:py-24 bg-white">
+          <div className="max-w-lg mx-auto px-5">
+            <h2 className="text-3xl md:text-4xl font-black text-primary text-center uppercase tracking-wide mb-8">
+              Nhận Ưu Đãi
+            </h2>
+
+            {submitStatus === 'success' ? (
+              <div className="text-center py-16 space-y-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-8 h-8 text-green-600" />
                 </div>
-                <div className="space-y-1">
-                  <label className="text-xs font-bold text-on-surface-variant uppercase ml-2">Số điện thoại</label>
-                  <input type="tel" placeholder="Số điện thoại của bạn" className="w-full p-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:ring-2 focus:ring-primary outline-none transition-all" />
+                <h3 className="text-xl font-bold text-green-700">Đặt hàng thành công!</h3>
+                <p className="text-slate-500 text-sm">Chúng tôi sẽ liên hệ xác nhận đơn hàng trong thời gian sớm nhất.</p>
+                <button
+                  onClick={() => setSubmitStatus('idle')}
+                  className="mt-4 text-primary underline text-sm font-medium"
+                >
+                  Đặt thêm
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleOrderSubmit} noValidate>
+                {/* Họ và Tên */}
+                <div className="mb-2">
+                  <input
+                    type="text"
+                    value={formName}
+                    onChange={e => { setFormName(e.target.value); setFormErrors(p => ({ ...p, name: '' })); }}
+                    placeholder="Họ và Tên"
+                    className={`w-full px-4 py-3.5 border ${formErrors.name ? 'border-red-400' : 'border-slate-300'} text-base outline-none focus:border-primary transition-colors`}
+                  />
+                  {formErrors.name && <p className="text-red-500 text-xs mt-1 ml-1">{formErrors.name}</p>}
                 </div>
-                <div className="space-y-1">
-                  <label className="text-xs font-bold text-on-surface-variant uppercase ml-2">Vấn đề của bạn</label>
-                  <textarea placeholder="Mô tả tình trạng hiện tại của bạn..." className="w-full p-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:ring-2 focus:ring-primary outline-none h-32 resize-none transition-all" />
+
+                {/* Số điện thoại */}
+                <div className="mb-2">
+                  <input
+                    type="tel"
+                    value={formPhone}
+                    onChange={e => { setFormPhone(e.target.value); setFormErrors(p => ({ ...p, phone: '' })); }}
+                    placeholder="Số điện thoại"
+                    className={`w-full px-4 py-3.5 border ${formErrors.phone ? 'border-red-400' : 'border-slate-300'} text-base outline-none focus:border-primary transition-colors`}
+                  />
+                  {formErrors.phone && <p className="text-red-500 text-xs mt-1 ml-1">{formErrors.phone}</p>}
                 </div>
-                <button className="w-full bg-primary text-white py-4 rounded-2xl font-bold text-lg hover:ambient-shadow transition-all uppercase tracking-widest mt-4">
-                  Nhận tư vấn miễn phí ngay
+
+                {/* Địa chỉ */}
+                <div className="mb-5">
+                  <input
+                    type="text"
+                    value={formAddress}
+                    onChange={e => { setFormAddress(e.target.value); setFormErrors(p => ({ ...p, address: '' })); }}
+                    placeholder="Địa chỉ"
+                    className={`w-full px-4 py-3.5 border ${formErrors.address ? 'border-red-400' : 'border-slate-300'} text-base outline-none focus:border-primary transition-colors`}
+                  />
+                  {formErrors.address && <p className="text-red-500 text-xs mt-1 ml-1">{formErrors.address}</p>}
+                </div>
+
+                {/* Combo radio group */}
+                <div className={`border ${formErrors.combo ? 'border-red-400' : 'border-slate-300'} mb-2 divide-y divide-slate-200`}>
+                  {COMBOS.map(combo => (
+                    <label
+                      key={combo.id}
+                      className={`flex items-start gap-3 px-4 py-3.5 cursor-pointer transition-colors ${formCombo === combo.id ? 'bg-red-50' : 'hover:bg-slate-50'}`}
+                    >
+                      <input
+                        type="radio"
+                        name="combo"
+                        value={combo.id}
+                        checked={formCombo === combo.id}
+                        onChange={() => { setFormCombo(combo.id); setFormErrors(p => ({ ...p, combo: '' })); }}
+                        className="mt-0.5 shrink-0 w-4 h-4 accent-primary"
+                      />
+                      <span className="text-sm leading-snug text-slate-700">
+                        {combo.label}
+                        {combo.hot && (
+                          <span className="ml-1.5 inline-block bg-red-600 text-white text-[10px] font-black px-1.5 py-0.5 rounded uppercase tracking-wide align-middle">
+                            HOT!
+                          </span>
+                        )}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+                {formErrors.combo && <p className="text-red-500 text-xs mb-4 ml-1">{formErrors.combo}</p>}
+
+                {submitStatus === 'error' && (
+                  <p className="text-red-500 text-sm text-center mb-4">
+                    Có lỗi xảy ra. Vui lòng thử lại hoặc gọi hotline{' '}
+                    <a href="tel:0917059933" className="font-bold">0917.05.99.33</a>
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-primary text-white py-4 rounded-full font-black text-xl uppercase tracking-widest hover:bg-primary-container transition-all mt-5 disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? 'Đang gửi...' : 'Đặt Mua'}
                 </button>
               </form>
-            </div>
-
-            <div className="relative group overflow-hidden bg-slate-100 flex items-center justify-center min-h-[260px] lg:min-h-[500px]">
-              <img 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
-                alt="Dược sĩ chuyên môn DrKam" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuByTpkBxz8sYgK81lM5Nf6GQRrTJ08xQhBcyPgXPWTxjvMr4JDTBHjBFrWBgEMREL5naqkucV8iEeAdNM_GXUwTNuSTQjHdZKrLCixEkFOpwxujh5a9QFFB_XcuezKIJWqA0j2W86gV0AXlhJcSGM3slJo0euJa4O2m28KKi3GMSfId9t7XhXEkm4Q2kUFQ77_ELK6mkmmzofajT_4RL-dA9ddiN5e45s4qvmtNEYnIRlY1EpD-GV2EBtGPw2sUk2wLryzsw-UZ2mU" 
-              />
-              <div className="absolute bottom-10 left-10 right-10 bg-white/90 backdrop-blur p-6 rounded-2xl shadow-xl border border-white">
-                <div className="flex gap-4 items-center">
-                  <div className="w-1 bg-primary h-12 rounded-full"></div>
-                  <div>
-                    <p className="font-bold text-xl text-primary">DS. Nguyễn Minh Hòa</p>
-                    <p className="text-sm font-medium text-on-surface-variant">Trưởng phòng R&D | 10 năm kinh nghiệm dược lâm sàng</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </section>
 
