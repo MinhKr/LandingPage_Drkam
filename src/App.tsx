@@ -11,8 +11,6 @@ import {
   Microscope,
   Truck,
   ChevronDown,
-  Search,
-  User,
   ShoppingCart,
   MapPin,
   Phone,
@@ -21,7 +19,8 @@ import {
   Menu,
   X,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ArrowRight
 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
@@ -30,6 +29,9 @@ import comboImg1 from '../Images/Combo/combo1.jpeg';
 import comboImg2 from '../Images/Combo/combo2.jpeg';
 import comboImg3 from '../Images/Combo/combo3.jpg';
 import comboImg5 from '../Images/Combo/combo5.jpg';
+import giftImg1 from '../Images/Gift/anh1.jpg';
+import giftImg2 from '../Images/Gift/anh2.jpg';
+import giftBoxImg from '../Images/Gift/ảnh gói quà.jpg';
 import overviewImg1 from '../Images/Overview/image1.jpeg';
 import overviewImg2 from '../Images/Overview/image2.png';
 import overviewImg3 from '../Images/Overview/image3.jpeg';
@@ -222,16 +224,11 @@ export default function App() {
             <a href="#ingredients" className="text-on-surface-variant hover:text-primary transition-colors">Thành phần</a>
             <a href="#reviews" className="text-on-surface-variant hover:text-primary transition-colors">Đánh giá</a>
             <a href="#products" className="text-on-surface-variant hover:text-primary transition-colors">Sản phẩm</a>
-            <a href="#contact" className="text-on-surface-variant hover:text-primary transition-colors">Liên hệ</a>
+            <a href="#footer" className="text-on-surface-variant hover:text-primary transition-colors">Liên hệ</a>
           </nav>
 
           <div className="flex items-center gap-4">
-            <div className="hidden lg:flex items-center gap-4 text-on-surface-variant">
-              <button aria-label="Tìm kiếm"><Search className="w-5 h-5 hover:text-primary transition-colors" /></button>
-              <button aria-label="Tài khoản"><User className="w-5 h-5 hover:text-primary transition-colors" /></button>
-              <button aria-label="Giỏ hàng"><ShoppingCart className="w-5 h-5 hover:text-primary transition-colors" /></button>
-            </div>
-            <button className="bg-primary text-white px-6 py-2 rounded-full font-bold hover:opacity-95 transition-all text-sm md:text-base">MUA NGAY</button>
+            <a href="#contact" className="bg-primary text-white px-6 py-2 rounded-full font-bold hover:opacity-95 transition-all text-sm md:text-base inline-flex items-center">MUA NGAY</a>
             <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X /> : <Menu />}
             </button>
@@ -251,7 +248,7 @@ export default function App() {
             <a href="#ingredients" onClick={() => setIsMenuOpen(false)}>Thành phần</a>
             <a href="#reviews" onClick={() => setIsMenuOpen(false)}>Đánh giá</a>
             <a href="#products" onClick={() => setIsMenuOpen(false)}>Sản phẩm</a>
-            <a href="#contact" onClick={() => setIsMenuOpen(false)}>Liên hệ</a>
+            <a href="#footer" onClick={() => setIsMenuOpen(false)}>Liên hệ</a>
           </nav>
         </motion.div>
       )}
@@ -458,7 +455,7 @@ export default function App() {
                     <ChevronDown className="w-5 h-5 transition-transform group-open:rotate-180" />
                   </summary>
                   <p className="pt-4 text-sm text-on-surface-variant italic">
-                    Đội ngũ chuyên gia DrKam trực tư vấn 24/7 qua hotline 0917.05.99.33 và Zalo. Bạn sẽ được tư vấn đúng sản phẩm phù hợp tình trạng răng miệng cụ thể, hoàn toàn miễn phí.
+                    Đội ngũ chuyên gia DrKam trực tư vấn 24/7 qua hotline 098.6088.610 và Zalo. Bạn sẽ được tư vấn đúng sản phẩm phù hợp tình trạng răng miệng cụ thể, hoàn toàn miễn phí.
                   </p>
                 </details>
               </div>
@@ -778,17 +775,118 @@ export default function App() {
 
             {/* Bottom note */}
             <p className="text-center text-xs text-slate-400 mt-8">
-              Tất cả combo miễn phí vận chuyển toàn quốc · Quà tặng áp dụng theo chương trình hiện hành · Liên hệ hotline <span className="font-bold text-primary">0917.05.99.33</span> để được tư vấn combo phù hợp
+              Tất cả combo miễn phí vận chuyển toàn quốc · Quà tặng áp dụng theo chương trình hiện hành · Liên hệ hotline <span className="font-bold text-primary">098.6088.610</span> để được tư vấn combo phù hợp
             </p>
           </div>
         </section>
 
         {/* Order Form */}
-        <section id="contact" className="scroll-mt-20 py-16 md:py-24 bg-white">
-          <div className="max-w-lg mx-auto px-5">
-            <h2 className="text-3xl md:text-4xl font-black text-primary text-center uppercase tracking-wide mb-8">
+        <section id="contact" className="scroll-mt-20 py-16 md:py-24" style={{ background: 'linear-gradient(to bottom, #fff8f7 0%, #ffffff 60%)' }}>
+          <div className="max-w-container-max mx-auto px-5 lg:px-6">
+            <h2 className="text-3xl md:text-4xl font-black text-primary text-center uppercase tracking-wide mb-10 md:mb-14">
               Nhận Ưu Đãi
             </h2>
+
+            <div className="grid lg:grid-cols-[1fr_minmax(0,_520px)] gap-8 lg:gap-12 items-start">
+
+              {/* LEFT — Gift gallery */}
+              <motion.aside
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.6 }}
+                className="order-2 lg:order-1 space-y-5"
+              >
+                <div className="relative bg-white rounded-2xl border-2 border-primary/15 shadow-md overflow-hidden">
+                  <div className="flex items-center justify-between gap-4 p-5 sm:p-6">
+                    {/* Platform comparison list */}
+                    <ul className="space-y-2.5 sm:space-y-3 shrink-0">
+                      {[
+                        { name: 'TIKTOK',   allowed: false },
+                        { name: 'SHOPEE',   allowed: false },
+                        { name: 'FACEBOOK', allowed: true },
+                      ].map(({ name, allowed }) => (
+                        <li key={name} className="flex items-center gap-3">
+                          {allowed ? (
+                            <span className="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+                              <CheckCircle2 className="w-5 h-5" strokeWidth={2.5} />
+                            </span>
+                          ) : (
+                            <span className="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+                              <X className="w-4 h-4" strokeWidth={3} />
+                            </span>
+                          )}
+                          <span className={`font-black tracking-wide text-base sm:text-lg ${allowed ? 'text-[#1877F2]' : 'text-on-surface-variant'}`}>
+                            {name}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* HOT badge + Gift visual */}
+                    <div className="relative flex items-center justify-center shrink-0 w-28 h-28 sm:w-32 sm:h-32">
+                      <span
+                        className="absolute -top-1 -left-2 z-10 bg-accent text-white text-[10px] sm:text-xs font-black uppercase px-2.5 py-1 rounded-md shadow-md -rotate-12"
+                        style={{ fontFamily: '"Be Vietnam Pro", sans-serif' }}
+                      >
+                        HOT!
+                      </span>
+                      <img
+                        src={giftBoxImg}
+                        alt="Bộ quà tặng độc quyền DrKam"
+                        className="w-full h-full object-contain drop-shadow-md select-none pointer-events-none"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Bottom red strip */}
+                  <div className="bg-primary text-white text-center py-2.5 sm:py-3 px-4">
+                    <p className="text-sm sm:text-base font-black uppercase tracking-wide">
+                      Bộ quà tặng chỉ có tại Facebook
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    { src: giftImg1, alt: 'Bộ quà tặng DrKam — cạo lưỡi, xịt miệng, tăm chỉ nha khoa' },
+                    { src: giftImg2, alt: 'Bộ quà tặng DrKam — súc miệng sinh học, kem đánh răng, bàn chải siêu mềm' },
+                  ].map((img, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-40px' }}
+                      transition={{ duration: 0.5, delay: 0.1 + idx * 0.1 }}
+                      className="relative bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
+                    >
+                      <span className="absolute top-3 left-3 z-10 bg-primary text-white text-[10px] font-black uppercase tracking-wider px-2 py-1 rounded-full shadow-md">
+                        Tặng kèm
+                      </span>
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        className="w-full h-auto object-cover aspect-square group-hover:scale-[1.02] transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+
+                <p className="text-xs text-on-surface-variant text-center italic">
+                  ✦ Quà tặng áp dụng cho đơn đặt hàng qua Facebook chính hãng DrKam — số lượng có hạn
+                </p>
+              </motion.aside>
+
+              {/* RIGHT — Form */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="order-1 lg:order-2 bg-white rounded-3xl shadow-xl border-t-4 border-primary p-6 sm:p-8 md:p-10"
+              >
 
             {submitStatus === 'success' ? (
               <div className="text-center py-16 space-y-4">
@@ -873,7 +971,7 @@ export default function App() {
                 {submitStatus === 'error' && (
                   <p className="text-red-500 text-sm text-center mb-4">
                     Có lỗi xảy ra. Vui lòng thử lại hoặc gọi hotline{' '}
-                    <a href="tel:0917059933" className="font-bold">0917.05.99.33</a>
+                    <a href="tel:0986088610" className="font-bold">098.6088.610</a>
                   </p>
                 )}
 
@@ -886,21 +984,88 @@ export default function App() {
                 </button>
               </form>
             )}
+              </motion.div>
+
+            </div>
           </div>
         </section>
 
-        {/* Media Mentions */}
-        <section className="py-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-default">
-          <div className="max-w-container-max mx-auto px-6 flex flex-wrap justify-center md:justify-between items-center gap-12">
-            {["VnExpress", "VTV News", "ZingNews", "HealthPlus", "Dantri"].map((brand, id) => (
-              <span key={id} className="text-2xl font-black italic tracking-tighter text-slate-400">{brand}</span>
-            ))}
+        {/* Trust / Cam kết */}
+        <section className="py-16 md:py-20 bg-white">
+          <div className="max-w-container-max mx-auto px-5 lg:px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6 }}
+              className="max-w-2xl mx-auto text-center mb-10"
+            >
+              <span className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-[11px] font-black uppercase tracking-[0.18em] px-3 py-1.5 rounded-full mb-4">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                Cam Kết DrKam
+              </span>
+              <h3 className="text-2xl md:text-4xl font-black text-on-surface leading-snug mb-3">
+                Nhận tư vấn 1:1 cùng <span className="text-primary">dược sĩ chuyên môn</span>
+              </h3>
+              <p className="text-on-surface-variant leading-relaxed text-[15px] md:text-base">
+                Quy trình minh bạch — bạn được kiểm tra sản phẩm trước khi thanh toán, đổi trả linh hoạt và giao hàng tận nơi trên toàn quốc.
+              </p>
+            </motion.div>
+
+            <ul className="grid md:grid-cols-3 gap-4 md:gap-5 mb-8">
+              {[
+                { icon: ShieldCheck, label: 'Kiểm tra sản phẩm', value: 'Thanh toán' },
+                { icon: Award,       label: 'Lỗi từ nhà sản xuất', value: 'Đổi trả lên tới 30 ngày' },
+                { icon: Truck,       label: 'Nhận hàng toàn quốc', value: 'Giao trong 2 – 4 ngày' },
+              ].map(({ icon: Icon, label, value }, idx) => (
+                <motion.li
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 p-5 md:p-6 text-center"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-7 h-7" strokeWidth={2.25} />
+                  </div>
+                  <p className="text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-2">
+                    {label}
+                  </p>
+                  <div className="flex items-center justify-center gap-2">
+                    <ArrowRight className="w-4 h-4 text-primary" strokeWidth={2.5} />
+                    <p className="font-black text-on-surface text-base md:text-lg">
+                      {value}
+                    </p>
+                  </div>
+                </motion.li>
+              ))}
+            </ul>
+
+            <motion.a
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              href="tel:0986088610"
+              className="max-w-2xl mx-auto flex items-center gap-4 bg-on-surface text-white rounded-2xl p-5 sm:p-6 hover:bg-primary transition-colors group"
+            >
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 group-hover:bg-white/20 transition-colors flex items-center justify-center shrink-0">
+                <Phone className="w-6 h-6 sm:w-7 sm:h-7" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-white/60 font-semibold mb-0.5">Hotline 24/7</p>
+                <p className="text-xl sm:text-2xl font-black tracking-tight">098.6088.610</p>
+              </div>
+              <ArrowRight className="w-5 h-5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all shrink-0" />
+            </motion.a>
           </div>
         </section>
+
       </main>
 
       {/* Footer */}
-      <footer className="bg-on-surface text-surface py-20 px-6 border-t border-white/5">
+      <footer id="footer" className="scroll-mt-20 bg-on-surface text-surface py-20 px-6 border-t border-white/5">
         <div className="max-w-container-max mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="space-y-6 lg:col-span-2 max-w-md">
             <div className="flex items-center">
@@ -909,12 +1074,6 @@ export default function App() {
             <p className="text-surface/60 leading-relaxed text-sm">
               Thương hiệu chăm sóc răng miệng y khoa ứng dụng công nghệ Postbiotic độc quyền — không cồn, không chất bảo quản, an toàn cho cả gia đình. Top 10 Thương Hiệu Uy Tín Quốc Gia 2024.
             </p>
-            <div className="flex gap-4 pt-4">
-              <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary transition-all cursor-pointer">
-                <Search className="w-4 h-4" />
-              </div>
-              {/* Other social icons could go here */}
-            </div>
           </div>
 
           <div>
@@ -931,7 +1090,7 @@ export default function App() {
             <h5 className="font-bold mb-6 text-accent uppercase tracking-widest text-xs">Thông tin liên hệ</h5>
             <ul className="space-y-4 text-sm text-surface/60">
               <li className="flex gap-3"><MapPin className="w-4 h-4 shrink-0 text-primary" /> Phường Yên Hoà, Cầu Giấy, Hà Nội</li>
-              <li className="flex gap-3"><Phone className="w-4 h-4 shrink-0 text-primary" /> 0917.05.99.33</li>
+              <li className="flex gap-3"><Phone className="w-4 h-4 shrink-0 text-primary" /> 098.6088.610</li>
               <li className="flex gap-3"><Mail className="w-4 h-4 shrink-0 text-primary" /> Drkamvietnam@gmail.com</li>
             </ul>
           </div>
