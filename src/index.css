@@ -70,3 +70,129 @@ button:focus-visible, a:focus-visible {
 .marquee-track:hover .marquee-right {
   animation-play-state: paused;
 }
+
+/* HOT badge: pulsing scale + shifting vibrant gradient */
+@keyframes hot-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 80, 0, 0.7);
+  }
+  50% {
+    transform: scale(1.18);
+    box-shadow: 0 0 12px rgba(255, 120, 0, 0.85);
+  }
+}
+
+@keyframes hot-shine {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hot-badge {
+  background-image: linear-gradient(
+    90deg,
+    #ffd400 0%,
+    #ff7a00 25%,
+    #ff1744 50%,
+    #ff00aa 75%,
+    #ffd400 100%
+  );
+  background-size: 200% 100%;
+  animation: hot-pulse 0.9s ease-in-out infinite, hot-shine 2.4s linear infinite;
+  transform-origin: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes soft-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(175, 16, 26, 0.25);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 6px 16px rgba(175, 16, 26, 0.45);
+  }
+}
+
+.soft-pulse {
+  animation: soft-pulse 1.6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.07); }
+}
+
+.gentle-pulse {
+  animation: gentle-pulse 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Fire / flame badge: layered radial gradients flickering like flames */
+@keyframes flame-flicker {
+  0% {
+    background-position: 50% 100%, 30% 100%, 70% 100%;
+    box-shadow:
+      0 0 6px rgba(255, 140, 0, 0.85),
+      0 0 14px rgba(255, 60, 0, 0.55);
+  }
+  25% {
+    background-position: 48% 95%, 32% 90%, 68% 92%;
+    box-shadow:
+      0 0 8px rgba(255, 170, 0, 0.95),
+      0 0 18px rgba(255, 80, 0, 0.65);
+  }
+  50% {
+    background-position: 52% 100%, 28% 100%, 72% 100%;
+    box-shadow:
+      0 0 10px rgba(255, 120, 0, 0.85),
+      0 0 16px rgba(255, 40, 0, 0.6);
+  }
+  75% {
+    background-position: 50% 92%, 31% 95%, 69% 90%;
+    box-shadow:
+      0 0 7px rgba(255, 200, 30, 0.95),
+      0 0 20px rgba(255, 70, 0, 0.7);
+  }
+  100% {
+    background-position: 50% 100%, 30% 100%, 70% 100%;
+    box-shadow:
+      0 0 6px rgba(255, 140, 0, 0.85),
+      0 0 14px rgba(255, 60, 0, 0.55);
+  }
+}
+
+@keyframes flame-wobble {
+  0%, 100% { transform: rotate(-12deg) scale(1); }
+  25%      { transform: rotate(-13deg) scale(1.04); }
+  50%      { transform: rotate(-11deg) scale(1.02); }
+  75%      { transform: rotate(-13.5deg) scale(1.05); }
+}
+
+.flame-badge {
+  background-color: #b71c1c;
+  background-image:
+    radial-gradient(ellipse at 50% 100%, #fff176 0%, #ffb300 18%, #ff6f00 38%, transparent 62%),
+    radial-gradient(ellipse at 30% 100%, #ffd54f 0%, #ff8f00 22%, transparent 55%),
+    radial-gradient(ellipse at 70% 100%, #ffeb3b 0%, #ff5722 25%, transparent 58%);
+  background-size: 100% 180%, 60% 140%, 60% 140%;
+  background-repeat: no-repeat;
+  text-shadow:
+    0 0 4px rgba(255, 220, 80, 0.9),
+    0 1px 1px rgba(120, 20, 0, 0.6);
+  animation:
+    flame-flicker 1.4s ease-in-out infinite,
+    flame-wobble 2.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hot-badge,
+  .soft-pulse,
+  .gentle-pulse,
+  .flame-badge {
+    animation: none;
+  }
+}

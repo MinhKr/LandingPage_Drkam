@@ -11,7 +11,6 @@ import {
   Microscope,
   Truck,
   ChevronDown,
-  ShoppingCart,
   MapPin,
   Phone,
   Mail,
@@ -253,7 +252,7 @@ export default function App() {
         </motion.div>
       )}
 
-      <main className="pt-20 pb-20 md:pb-0">
+      <main className="pt-20">
         {/* Flash Sale Bar */}
         <div className="countdown-red w-full py-3">
           <div className="max-w-container-max mx-auto px-6 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
@@ -307,12 +306,12 @@ export default function App() {
 
             {/* Buttons — desktop only (shown inside left column) */}
             <div className="hidden md:flex flex-col sm:flex-row gap-4 pt-4">
-              <button className="bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all">
-                ĐẶT HÀNG — MIỄN PHÍ VẬN CHUYỂN
-              </button>
-              <button className="border-2 border-primary text-primary px-8 py-4 rounded-xl text-lg font-bold hover:bg-primary/5 transition-all">
+              <a href="#contact" className="inline-flex items-center justify-center text-center bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all">
+                Đặt hàng - Nhận ưu đãi
+              </a>
+              <a href="#products" className="inline-flex items-center justify-center text-center border-2 border-primary text-primary px-8 py-4 rounded-xl text-lg font-bold hover:bg-primary/5 transition-all">
                 XEM COMBO TIẾT KIỆM
-              </button>
+              </a>
             </div>
           </motion.div>
 
@@ -327,12 +326,12 @@ export default function App() {
 
           {/* Buttons — mobile only (shown after carousel) */}
           <div className="flex md:hidden flex-col gap-3 pt-2">
-            <button className="w-full bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all">
-              ĐẶT HÀNG — MIỄN PHÍ VẬN CHUYỂN
-            </button>
-            <button className="w-full border-2 border-primary text-primary px-8 py-4 rounded-xl text-lg font-bold hover:bg-primary/5 transition-all">
+            <a href="#contact" className="w-full inline-flex items-center justify-center text-center bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-all">
+              Đặt hàng - Nhận ưu đãi
+            </a>
+            <a href="#products" className="w-full inline-flex items-center justify-center text-center border-2 border-primary text-primary px-8 py-4 rounded-xl text-lg font-bold hover:bg-primary/5 transition-all">
               XEM COMBO TIẾT KIỆM
-            </button>
+            </a>
           </div>
         </section>
 
@@ -588,13 +587,13 @@ export default function App() {
             {/* Value progression bar */}
             <div className="flex justify-center mb-10">
               <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-1 bg-white border border-slate-200 rounded-2xl px-6 py-3 shadow-sm text-xs font-bold">
-                <span className="text-slate-400">1 chai · 180k</span>
-                <span className="text-slate-300 hidden sm:inline">→</span>
-                <span className="text-primary">2 chai · tiết kiệm 32k + quà</span>
-                <span className="text-slate-300 hidden sm:inline">→</span>
-                <span className="text-accent">3 chai · + bộ 5 sản phẩm</span>
-                <span className="text-slate-300 hidden sm:inline">→</span>
-                <span className="text-green-600 font-black">5 chai · 1 chai miễn phí + bộ quà</span>
+                <span className="text-slate-400">1 chai</span>
+                <span className="text-slate-300">→</span>
+                <span className="text-primary">2 chai</span>
+                <span className="text-slate-300">→</span>
+                <span className="text-accent">3 chai</span>
+                <span className="text-slate-300">→</span>
+                <span className="text-green-600 font-black">5 chai</span>
               </div>
             </div>
 
@@ -795,7 +794,7 @@ export default function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.6 }}
-                className="order-2 lg:order-1 space-y-5"
+                className="order-1 lg:order-1 space-y-5"
               >
                 <div className="relative bg-white rounded-2xl border-2 border-primary/15 shadow-md overflow-hidden">
                   <div className="flex items-center justify-between gap-4 p-5 sm:p-6">
@@ -826,7 +825,7 @@ export default function App() {
                     {/* HOT badge + Gift visual */}
                     <div className="relative flex items-center justify-center shrink-0 w-28 h-28 sm:w-32 sm:h-32">
                       <span
-                        className="absolute -top-1 -left-2 z-10 bg-accent text-white text-[10px] sm:text-xs font-black uppercase px-2.5 py-1 rounded-md shadow-md -rotate-12"
+                        className="flame-badge absolute -top-1 -left-2 z-10 text-white text-[10px] sm:text-xs font-black uppercase px-2.5 py-1 rounded-md"
                         style={{ fontFamily: '"Be Vietnam Pro", sans-serif' }}
                       >
                         HOT!
@@ -834,7 +833,7 @@ export default function App() {
                       <img
                         src={giftBoxImg}
                         alt="Bộ quà tặng độc quyền DrKam"
-                        className="w-full h-full object-contain drop-shadow-md select-none pointer-events-none"
+                        className="gentle-pulse w-full h-full object-contain mix-blend-multiply select-none pointer-events-none"
                         loading="lazy"
                       />
                     </div>
@@ -885,7 +884,7 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="order-1 lg:order-2 bg-white rounded-3xl shadow-xl border-t-4 border-primary p-6 sm:p-8 md:p-10"
+                className="order-2 lg:order-2 bg-white rounded-3xl shadow-xl border-t-4 border-primary p-6 sm:p-8 md:p-10"
               >
 
             {submitStatus === 'success' ? (
@@ -958,7 +957,7 @@ export default function App() {
                       <span className="text-sm leading-snug text-slate-700">
                         {combo.label}
                         {combo.hot && (
-                          <span className="ml-1.5 inline-block bg-red-600 text-white text-[10px] font-black px-1.5 py-0.5 rounded uppercase tracking-wide align-middle">
+                          <span className="hot-badge ml-1.5 inline-block text-white text-[10px] font-black px-1.5 py-0.5 rounded uppercase tracking-wide align-middle">
                             HOT!
                           </span>
                         )}
@@ -978,7 +977,7 @@ export default function App() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-primary text-white py-4 rounded-full font-black text-xl uppercase tracking-widest hover:bg-primary-container transition-all mt-5 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="soft-pulse mx-auto block bg-primary text-white py-3 px-10 rounded-full font-black text-base uppercase tracking-wider hover:bg-primary-container transition-colors mt-5 disabled:opacity-70 disabled:cursor-not-allowed disabled:animate-none"
                 >
                   {isSubmitting ? 'Đang gửi...' : 'Đặt Mua'}
                 </button>
@@ -1099,21 +1098,6 @@ export default function App() {
           © {new Date().getFullYear()} DrKam Vietnam. All rights reserved. Sản phẩm được khuyên dùng bởi các bác sĩ nha khoa đầu ngành.
         </div>
       </footer>
-
-      {/* Mobile Sticky Navigation */}
-      <nav className="fixed bottom-0 w-full z-50 md:hidden bg-white/95 backdrop-blur-md border-t border-slate-100 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] pb-safe">
-        <div className="flex justify-around items-center h-16 px-4">
-          <button className="flex flex-col items-center justify-center text-on-surface-variant font-bold text-[10px] uppercase tracking-tighter">
-            <Phone className="w-5 h-5 mb-1" /> Gọi điện
-          </button>
-          <button className="flex flex-col items-center justify-center text-on-surface-variant font-bold text-[10px] uppercase tracking-tighter">
-            <Mail className="w-5 h-5 mb-1" /> Zalo
-          </button>
-          <button className="flex flex-col items-center justify-center text-primary font-black text-xs uppercase tracking-tighter transform scale-110">
-            <ShoppingCart className="w-6 h-6 mb-1 fill-current" /> Đặt hàng
-          </button>
-        </div>
-      </nav>
     </div>
   );
 }
