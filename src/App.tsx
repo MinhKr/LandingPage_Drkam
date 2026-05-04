@@ -24,10 +24,10 @@ import {
 import { useState, useEffect, useRef } from 'react';
 
 import logoImg from '../Images/logo_Drkam.jpg';
-import comboImg1 from '../Images/Combo/combo1.jpeg';
-import comboImg2 from '../Images/Combo/combo2.jpeg';
-import comboImg3 from '../Images/Combo/combo3.jpg';
-import comboImg5 from '../Images/Combo/combo5.jpg';
+import comboImg1 from '../Images/Combo/combo1_fix.jpeg';
+import comboImg2 from '../Images/Combo/combo2_fix.jpeg';
+import comboImg3 from '../Images/Combo/combo3_fix.jpeg';
+import comboImg5 from '../Images/Combo/combo5_fix.jpeg';
 import giftImg1 from '../Images/Gift/anh1.jpg';
 import giftImg2 from '../Images/Gift/anh2.jpg';
 import giftBoxImg from '../Images/Gift/ảnh gói quà.jpg';
@@ -524,7 +524,7 @@ export default function App() {
                 ].map((src, i) => (
                   <div
                     key={i}
-                    className="flex-shrink-0 w-[520px] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white"
+                    className="flex-shrink-0 w-[280px] sm:w-[400px] md:w-[520px] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white"
                   >
                     <img
                       src={src}
@@ -545,7 +545,7 @@ export default function App() {
                 ].map((src, i) => (
                   <div
                     key={i}
-                    className="flex-shrink-0 w-[520px] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white"
+                    className="flex-shrink-0 w-[280px] sm:w-[400px] md:w-[520px] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white"
                   >
                     <img
                       src={src}
@@ -617,21 +617,20 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="w-full aspect-[3/2] rounded-xl mb-5 overflow-hidden">
+                <div className="w-full aspect-[1200/896] rounded-xl mb-5 overflow-hidden">
                   <img src={comboImg1} alt="Combo 1 chai nước súc miệng DrKam 500ml" className="w-full h-full object-cover" />
                 </div>
 
-                <div className="flex-grow space-y-2 mb-6">
-                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Bao gồm</p>
-                  <div className="flex items-center gap-2 text-sm">
-                    <span className="w-5 h-5 bg-primary/10 text-primary rounded-full flex items-center justify-center text-[10px] font-black shrink-0">1</span>
-                    <span className="font-medium">Chai nước súc miệng DrKam 500ml</span>
-                  </div>
-                </div>
+                <div className="flex-grow" />
 
-                <button className="w-full border-2 border-primary text-primary py-3 rounded-xl font-bold hover:bg-primary/5 transition-all text-sm uppercase tracking-wide">
+                <a
+                  href="https://shopee.vn/N%C6%B0%E1%BB%9Bc-S%C3%BAc-Mi%E1%BB%87ng-Chu%E1%BA%A9n-Y-Khoa-DrKam-250ml-Kh%E1%BB%AD-H%C3%B4i-Mi%E1%BB%87ng-Gi%E1%BA%A3m-Vi%C3%AAm-N%C6%B0%E1%BB%9Bu-Kh%C3%B4ng-C%E1%BB%93n-Kh%C3%B4ng-Cay-i.1357220472.24436434479?extraParams=%7B%22display_model_id%22%3A280607716722%2C%22model_selection_logic%22%3A3%7D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full border-2 border-primary text-primary py-3 rounded-xl font-bold hover:bg-primary/5 transition-all text-sm uppercase tracking-wide text-center block"
+                >
                   Chọn combo này
-                </button>
+                </a>
               </motion.div>
 
               {/* Combo 2 — HOT NHẤT */}
@@ -659,25 +658,20 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div className="w-full aspect-[16/7] rounded-xl mb-5 overflow-hidden">
+                  <div className="w-full aspect-[1376/768] rounded-xl mb-5 overflow-hidden">
                     <img src={comboImg2} alt="Combo 2 chai nước súc miệng DrKam + 2 kem đánh răng Sinh Học" className="w-full h-full object-cover" />
                   </div>
 
-                  <div className="flex-grow space-y-2 mb-6">
-                    <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Bao gồm</p>
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="w-5 h-5 bg-primary/10 text-primary rounded-full flex items-center justify-center text-[10px] font-black shrink-0">2</span>
-                      <span className="font-medium">Chai nước súc miệng DrKam 500ml</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="w-5 h-5 bg-green-100 text-green-700 rounded-full flex items-center justify-center shrink-0 text-[10px]">🎁</span>
-                      <span className="font-bold text-green-700">Tặng 2 kem đánh răng Sinh Học</span>
-                    </div>
-                  </div>
+                  <div className="flex-grow" />
 
-                  <button className="w-full bg-primary text-white py-4 rounded-xl font-black shadow-lg hover:bg-primary-container transition-all uppercase tracking-widest">
+                  <a
+                    href="https://shopee.vn/Combo-2-N%C6%B0%E1%BB%9Bc-S%C3%BAc-Mi%E1%BB%87ng-Chu%E1%BA%A9n-Y-Khoa-DrKam-250ml-Kh%E1%BB%AD-H%C3%B4i-Mi%E1%BB%87ng-Vi%C3%AAm-N%C6%B0%E1%BB%9Bu-Kh%C3%B4ng-Cay-Kh%C3%B4ng-C%E1%BB%93n-i.1295994548.28356553669?extraParams=%7B%22display_model_id%22%3A306611390461%2C%22model_selection_logic%22%3A3%7D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-primary text-white py-4 rounded-xl font-black shadow-lg hover:bg-primary-container transition-all uppercase tracking-widest text-center block"
+                  >
                     Đặt ngay — Miễn ship
-                  </button>
+                  </a>
                 </div>
               </motion.div>
             </div>
@@ -702,27 +696,20 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="w-full aspect-[16/9] rounded-xl mb-4 overflow-hidden">
+                <div className="w-full aspect-[1200/896] rounded-xl mb-4 overflow-hidden">
                   <img src={comboImg3} alt="Combo 3 chai DrKam + bộ quà tặng 5 sản phẩm" className="w-full h-full object-cover" />
                 </div>
 
-                <div className="flex-grow space-y-1.5 mb-5 text-sm">
-                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Bao gồm</p>
-                  <div className="flex items-start gap-2">
-                    <span className="w-5 h-5 bg-primary/10 text-primary rounded-full flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">3</span>
-                    <span className="font-medium">Chai nước súc miệng DrKam 500ml</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="w-5 h-5 bg-green-100 text-green-700 rounded-full flex items-center justify-center shrink-0 text-[10px] mt-0.5">🎁</span>
-                    <div className="text-green-700 font-bold text-xs leading-relaxed">
-                      Tặng: 1 kem đánh răng Sinh Học · 1 chai súc miệng Sinh Học · 1 cạo lưỡi · 1 bàn chải đa năng · 1 bộ tăm chỉ nha khoa
-                    </div>
-                  </div>
-                </div>
+                <div className="flex-grow" />
 
-                <button className="w-full border-2 border-primary text-primary py-3 rounded-xl font-bold hover:bg-primary/5 transition-all text-sm uppercase tracking-wide">
+                <a
+                  href="https://shopee.vn/Combo-3-N%C6%B0%E1%BB%9Bc-S%C3%BAc-Mi%E1%BB%87ng-Chu%E1%BA%A9n-Y-Khoa-DrKam-Kh%E1%BB%AD-H%C3%B4i-Mi%E1%BB%87ng-Gi%E1%BA%A3m-Vi%C3%AAm-N%C6%B0%E1%BB%9Bu-Kh%C3%B4ng-C%E1%BB%93n-Kh%C3%B4ng-Cay-i.1357220472.29462352796?extraParams=%7B%22display_model_id%22%3A286507909827%2C%22model_selection_logic%22%3A3%7D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full border-2 border-primary text-primary py-3 rounded-xl font-bold hover:bg-primary/5 transition-all text-sm uppercase tracking-wide text-center block"
+                >
                   Chọn combo này
-                </button>
+                </a>
               </motion.div>
 
               {/* Combo 5 */}
@@ -743,32 +730,24 @@ export default function App() {
                   </div>
                   <div className="text-right shrink-0">
                     <p className="text-2xl font-black text-primary">888.000đ</p>
-                    <p className="text-[10px] text-green-600 font-bold">~148k/chai*</p>
+                    <p className="text-[10px] text-green-600 font-bold">~148k/chai</p>
                   </div>
                 </div>
 
-                <div className="w-full aspect-[16/9] rounded-xl mb-4 overflow-hidden">
+                <div className="w-full aspect-[1200/896] rounded-xl mb-4 overflow-hidden">
                   <img src={comboImg5} alt="Combo 5 chai DrKam + 1 chai tặng + bộ quà tặng" className="w-full h-full object-cover" />
                 </div>
 
-                <div className="flex-grow space-y-1.5 mb-5 text-sm">
-                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Bao gồm</p>
-                  <div className="flex items-start gap-2">
-                    <span className="w-5 h-5 bg-primary/10 text-primary rounded-full flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">5</span>
-                    <span className="font-medium">Chai nước súc miệng DrKam 500ml</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="w-5 h-5 bg-green-100 text-green-700 rounded-full flex items-center justify-center shrink-0 text-[10px] mt-0.5">🎁</span>
-                    <div className="text-green-700 font-bold text-xs leading-relaxed">
-                      Tặng 1 chai + Bộ Quà Tặng: 1 kem đánh răng Sinh Học · 1 chai súc miệng Sinh Học · 1 cạo lưỡi · 1 bàn chải đa năng
-                    </div>
-                  </div>
-                  <p className="text-[10px] text-slate-400 pl-7">*tính cả 1 chai tặng = 6 chai / 888k</p>
-                </div>
+                <div className="flex-grow" />
 
-                <button className="w-full bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition-all text-sm uppercase tracking-wide shadow-md">
+                <a
+                  href="https://shopee.vn/Combo-5-N%C6%B0%E1%BB%9Bc-S%C3%BAc-Mi%E1%BB%87ng-Chu%E1%BA%A9n-Y-Khoa-DrKam-250ml-Kh%E1%BB%AD-H%C3%B4i-Mi%E1%BB%87ng-Gi%E1%BA%A3m-Vi%C3%AAm-N%C6%B0%E1%BB%9Bu-Gi%E1%BA%A3m-%C3%8A-Bu%E1%BB%91t-R%C4%83ng-i.1357220472.29462347991?extraParams=%7B%22display_model_id%22%3A270449751871%2C%22model_selection_logic%22%3A3%7D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition-all text-sm uppercase tracking-wide shadow-md text-center block"
+                >
                   Chọn combo tiết kiệm nhất
-                </button>
+                </a>
               </motion.div>
             </div>
 
