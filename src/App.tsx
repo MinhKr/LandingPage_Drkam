@@ -145,6 +145,35 @@ function HeroCarousel() {
   );
 }
 
+function InAppBrowserBanner() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const ua = navigator.userAgent || '';
+    const inApp = /FBAN|FBAV|Instagram|Zalo|Line|TikTok|MicroMessenger/i.test(ua);
+    if (inApp) setShow(true);
+  }, []);
+
+  if (!show) return null;
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-[60] bg-amber-500 text-white px-4 py-3 shadow-2xl border-t border-amber-600">
+      <div className="max-w-container-max mx-auto flex items-center gap-3">
+        <div className="flex-1 text-sm font-semibold leading-snug">
+          💡 Để đặt mua nhanh trên app Shopee, hãy mở trang qua menu <strong>⋯</strong> → <strong>"Mở trong Safari/Chrome"</strong>
+        </div>
+        <button
+          onClick={() => setShow(false)}
+          aria-label="Đóng"
+          className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 45, seconds: 12 });
@@ -211,6 +240,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
+      <InAppBrowserBanner />
       {/* Header */}
       <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="max-w-container-max mx-auto px-6 h-20 flex justify-between items-center">
@@ -524,7 +554,7 @@ export default function App() {
                 ].map((src, i) => (
                   <div
                     key={i}
-                    className="flex-shrink-0 w-[280px] sm:w-[400px] md:w-[520px] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white"
+                    className="flex-shrink-0 w-[340px] sm:w-[400px] md:w-[520px] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white"
                   >
                     <img
                       src={src}
@@ -545,7 +575,7 @@ export default function App() {
                 ].map((src, i) => (
                   <div
                     key={i}
-                    className="flex-shrink-0 w-[280px] sm:w-[400px] md:w-[520px] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white"
+                    className="flex-shrink-0 w-[340px] sm:w-[400px] md:w-[520px] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white"
                   >
                     <img
                       src={src}
@@ -624,7 +654,7 @@ export default function App() {
                 <div className="flex-grow" />
 
                 <a
-                  href="https://shopee.vn/N%C6%B0%E1%BB%9Bc-S%C3%BAc-Mi%E1%BB%87ng-Chu%E1%BA%A9n-Y-Khoa-DrKam-250ml-Kh%E1%BB%AD-H%C3%B4i-Mi%E1%BB%87ng-Gi%E1%BA%A3m-Vi%C3%AAm-N%C6%B0%E1%BB%9Bu-Kh%C3%B4ng-C%E1%BB%93n-Kh%C3%B4ng-Cay-i.1357220472.24436434479?extraParams=%7B%22display_model_id%22%3A280607716722%2C%22model_selection_logic%22%3A3%7D"
+                  href="https://vn.shp.ee/Sh1i4pYz"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full border-2 border-primary text-primary py-3 rounded-xl font-bold hover:bg-primary/5 transition-all text-sm uppercase tracking-wide text-center block"
@@ -665,7 +695,7 @@ export default function App() {
                   <div className="flex-grow" />
 
                   <a
-                    href="https://shopee.vn/Combo-2-N%C6%B0%E1%BB%9Bc-S%C3%BAc-Mi%E1%BB%87ng-Chu%E1%BA%A9n-Y-Khoa-DrKam-250ml-Kh%E1%BB%AD-H%C3%B4i-Mi%E1%BB%87ng-Vi%C3%AAm-N%C6%B0%E1%BB%9Bu-Kh%C3%B4ng-Cay-Kh%C3%B4ng-C%E1%BB%93n-i.1295994548.28356553669?extraParams=%7B%22display_model_id%22%3A306611390461%2C%22model_selection_logic%22%3A3%7D"
+                    href="https://vn.shp.ee/3bf7qcSQ"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full bg-primary text-white py-4 rounded-xl font-black shadow-lg hover:bg-primary-container transition-all uppercase tracking-widest text-center block"
@@ -703,7 +733,7 @@ export default function App() {
                 <div className="flex-grow" />
 
                 <a
-                  href="https://shopee.vn/Combo-3-N%C6%B0%E1%BB%9Bc-S%C3%BAc-Mi%E1%BB%87ng-Chu%E1%BA%A9n-Y-Khoa-DrKam-Kh%E1%BB%AD-H%C3%B4i-Mi%E1%BB%87ng-Gi%E1%BA%A3m-Vi%C3%AAm-N%C6%B0%E1%BB%9Bu-Kh%C3%B4ng-C%E1%BB%93n-Kh%C3%B4ng-Cay-i.1357220472.29462352796?extraParams=%7B%22display_model_id%22%3A286507909827%2C%22model_selection_logic%22%3A3%7D"
+                  href="https://vn.shp.ee/ZEAbMfGR"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full border-2 border-primary text-primary py-3 rounded-xl font-bold hover:bg-primary/5 transition-all text-sm uppercase tracking-wide text-center block"
@@ -741,7 +771,7 @@ export default function App() {
                 <div className="flex-grow" />
 
                 <a
-                  href="https://shopee.vn/Combo-5-N%C6%B0%E1%BB%9Bc-S%C3%BAc-Mi%E1%BB%87ng-Chu%E1%BA%A9n-Y-Khoa-DrKam-250ml-Kh%E1%BB%AD-H%C3%B4i-Mi%E1%BB%87ng-Gi%E1%BA%A3m-Vi%C3%AAm-N%C6%B0%E1%BB%9Bu-Gi%E1%BA%A3m-%C3%8A-Bu%E1%BB%91t-R%C4%83ng-i.1357220472.29462347991?extraParams=%7B%22display_model_id%22%3A270449751871%2C%22model_selection_logic%22%3A3%7D"
+                  href="https://vn.shp.ee/aZX4DYWd"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition-all text-sm uppercase tracking-wide shadow-md text-center block"
@@ -976,13 +1006,13 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.6 }}
-              className="max-w-2xl mx-auto text-center mb-10"
+              className="max-w-4xl mx-auto text-center mb-10"
             >
               <span className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-[11px] font-black uppercase tracking-[0.18em] px-3 py-1.5 rounded-full mb-4">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 Cam Kết DrKam
               </span>
-              <h3 className="text-2xl md:text-4xl font-black text-on-surface leading-snug mb-3">
+              <h3 className="text-2xl md:text-[2rem] lg:text-4xl font-black text-on-surface leading-snug mb-3 md:whitespace-nowrap">
                 Nhận tư vấn 1:1 cùng <span className="text-primary">dược sĩ chuyên môn</span>
               </h3>
               <p className="text-on-surface-variant leading-relaxed text-[15px] md:text-base">
